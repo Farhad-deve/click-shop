@@ -1,0 +1,10 @@
+
+
+export const CategoryList = () => {
+  return (
+    <>
+        
+    </>
+  )
+}
+
