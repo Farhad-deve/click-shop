@@ -1,12 +1,7 @@
-import HomePage from "../pages/HomePage"
+import { MainLayout } from "../widgets/layout/MainLayout"
 
 function App() {
-
-  return (
-    <>
-      <HomePage />
-    </>
-  )
+  return <MainLayout />;
 }
 
 export default App

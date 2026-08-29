@@ -1,1 +1,38 @@
 @import "tailwindcss";
+
+@theme {
+  --font-montserrat: "Montserrat", sans-serif;
+}
+
+button {
+  cursor: pointer;
+}
+
+.btn {
+  border-radius: 9999px;
+  padding: 5px 12px;
+  font-weight: 500;
+}
+.btn-primary {
+  background-image: linear-gradient(to right, #2563eb, #6366f1);
+  color: #fff;
+  transition-duration: 75ms;
+}
+
+@keyframes move-right {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+.move-right {
+  animation-name: move-right;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
