@@ -6,7 +6,7 @@ import Logo from '/logo.jpg'
 
 export const Header = () => {
   return (
-    <header className="bg-white rounded-lg max-h-15 min-h-15 flex justify-between items-center gap-1 p-3.75 shadow-sm">
+    <header className="bg-white border border-[#e5e7eb] rounded-lg max-h-15 min-h-15 flex justify-between items-center gap-1 p-3.75 shadow-sm">
       <div>
         <Link to={"/"}>
           <img src={Logo} alt="Click Shop" className="h-7.5 sm:h-8.75 object-contain active:scale-95 duration-100" />
