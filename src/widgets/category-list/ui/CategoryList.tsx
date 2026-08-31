@@ -3,9 +3,12 @@ import { CiGrid41 } from "react-icons/ci";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useGetCategoriesQuery } from "../../../entities/category";
 import { Navigation } from "swiper/modules";
+import { Loader } from "../../../shared/Loader";
 
 export const CategoryList = () => {
-  const { data: categories } = useGetCategoriesQuery();
+  const { data: categories, isLoading } = useGetCategoriesQuery();
+
+  if (isLoading) return <Loader />;
 
   return (
     <>
@@ -31,7 +34,7 @@ export const CategoryList = () => {
 
           <Swiper modules={[Navigation]} navigation={{ nextEl: ".swiper-button-next" }} slidesPerView={"auto"} spaceBetween={5}>
             {categories?.map((cat) => (
-              <SwiperSlide key={cat.id} className="min-w-max" style={{ marginRight: "5px" }}>
+              <SwiperSlide className="min-w-max !w-[160px] sm:!w-[183px] lg:!w-[200px]" key={cat.id}>
                 <div className="border bg-white hover:bg-gray-50 relative overflow-hidden active:scale-95 duration-75 cursor-pointer px-[5px] sm:px-[10px] py-[5px] rounded-md shadow-sm">
                   <button type="button" className="flex justify-center items-center gap-1 w-full">
                     <div>
@@ -54,7 +57,7 @@ export const CategoryList = () => {
           </Swiper>
 
           <button type="button" className="swiper-button-next cursor-pointer hover:scale-110 active:scale-95 size-4">
-            <BiChevronRight className="size-4" />    
+            <BiChevronRight size={16} />    
           </button>
         </div>
       </div>
