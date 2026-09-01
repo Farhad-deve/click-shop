@@ -1,21 +1,11 @@
-import { DotLottieReact } from "@lottiefiles/dotlottie-react"
-
-
 const LoadingPage = () => {
   return (
     <>
-      <div className="bg-gray w-full h-full flex justify-center items-center">
-        <div>
-          <DotLottieReact
-            src="/loading.lottie"
-            loop
-            autoplay
-            className="w-[18rem] h-[18rem]"
-          />
-        </div>
+      <div className="flex justify-center items-center py-4 min-h-[calc(100vh-77px)]">
+        <div className="w-6 h-6 border-2 border-indigo-600 border-t-transparent rounded-full animate-spin"></div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default LoadingPage
+export default LoadingPage;

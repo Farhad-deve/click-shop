@@ -1,6 +1,5 @@
 import { BiCartAlt } from "react-icons/bi"; 
-import { FiSearch } from "react-icons/fi"; 
-import { FiHeart } from "react-icons/fi"; 
+import { FiSearch, FiHeart } from "react-icons/fi";  
 import { Link } from "react-router-dom";
 import Logo from '/logo.jpg'
 

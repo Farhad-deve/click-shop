@@ -1,20 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
-import { lazy } from "react";
-import { HomePage } from "../../pages/home";
-
-const ProductsPage = lazy(() =>
-  import("../../pages/products").then((module) => ({ default: module.ProductsPage, })),
-);
-const FavoritesPage = lazy(() =>
-  import("../../pages/favorites").then((module) => ({ default: module.FavoritesPage, })),
-);
-const CartPage = lazy(() =>
-  import("../../pages/cart").then((module) => ({ default: module.CartPage })),
-);
-const ProfilePage = lazy(() =>
-  import("../../pages/profile").then((module) => ({ default: module.ProfilePage, })),
-);
 
 export const router = createBrowserRouter([
   {
@@ -23,23 +8,52 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <HomePage />,
+        lazy: async () => {
+          const { HomePage } = await import("../../pages/home");
+          return { Component: HomePage };
+        },
       },
       {
         path: "products",
-        element: <ProductsPage />,
+        lazy: async () => {
+          const { ProductsPage } = await import("../../pages/products");
+          return { Component: ProductsPage };
+        },
+      },
+      {
+        path: "products/:id",
+        lazy: async () => {
+          const { ProductPage } = await import("../../pages/products");
+          return { Component: ProductPage };
+        },
       },
       {
         path: "favorites",
-        element: <FavoritesPage />,
+        lazy: async () => {
+          const { FavoritesPage } = await import("../../pages/favorites");
+          return { Component: FavoritesPage };
+        },
       },
       {
         path: "basket",
-        element: <CartPage />,
+        lazy: async () => {
+          const { CartPage } = await import("../../pages/cart");
+          return { Component: CartPage };
+        },
       },
       {
         path: "profile",
-        element: <ProfilePage />,
+        lazy: async () => {
+          const { ProfilePage } = await import("../../pages/profile");
+          return { Component: ProfilePage };
+        },
+      },
+      {
+        path: "*",
+        lazy: async () => {
+          const { NotFoundPage } = await import("../../pages/not-found");
+          return { Component: NotFoundPage };
+        },
       },
     ],
   },

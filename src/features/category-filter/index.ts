@@ -1,0 +1,1 @@
+export { setSelectedCategory, categoryFilterReducer } from './model/categoryFilterSlice';

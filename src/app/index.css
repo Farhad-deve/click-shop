@@ -19,6 +19,26 @@ button {
   transition-duration: 75ms;
 }
 
+/* ---------- Related to swiper ---------- */
+
+.swiper-button-next,
+.swiper-button-prev {
+  position: static !important;
+  width: 1.3rem !important;
+  height: 1.3rem !important;
+  margin: 0 !important;
+  color: inherit !important;
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  content: none !important;
+}
+
+/* ---------- ---------- */
+
+/* ---------- Related to animations ---------- */
+
 @keyframes move-right {
   0% {
     transform: translateX(0);
@@ -36,3 +56,25 @@ button {
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
 }
+
+/* ---------- ---------- */
+
+/* -------- Related to scrollbar ---------- */
+
+/* thin scrollbar, Chrome/Edge/Safari */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #c7c7c7;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #a3a3a3;
+}
+
+/* ---------- ---------- */
