@@ -20,7 +20,7 @@ export const CategoryList = () => {
 
   return (
     <>
-      <div className="sticky right-2.5 z-1 left-2.5 -top-0.5 bg-white p-1.75 border-b border-[#e5e7eb] shadow-sm">
+      <div className="sticky right-2.5 z-1 left-2.5 -top-0.5 bg-white dark:bg-indigo-900 p-1.75 border-b border-[#e5e7eb] dark:border-indigo-800 shadow-sm">
         <motion.div
           className="flex justify-start items-center gap-1 max-w-350 mx-auto"
           initial={{ opacity: 0, y: -50 }}
@@ -31,20 +31,20 @@ export const CategoryList = () => {
           <button
             onClick={() => dispatch(setSelectedCategory("all"))}
             type="button"
-            className="border border-[#e5e7eb] bg-white relative overflow-hidden min-w-max hover:bg-gray-50 active:scale-95 duration-75 cursor-pointer px-3.75 py-1.25 rounded-md shadow-sm flex justify-center items-center gap-1"
+            className="border border-[#e5e7eb] dark:border-indigo-700 bg-white dark:bg-indigo-800 relative overflow-hidden min-w-max hover:bg-gray-50 dark:hover:bg-indigo-700 active:scale-95 duration-75 cursor-pointer px-3.75 py-1.25 rounded-md shadow-sm flex justify-center items-center gap-1"
           >
-            <div className="min-h-5 sm:min-h-6.25 flex justify-center items-center">
+            <div className="min-h-5 sm:min-h-6.25 flex  justify-center items-center dark:text-white">
               <CiGrid41 />
             </div>
 
-            <div className="font-semibold text-[12px] sm:text-[14px]">
+            <div className="font-semibold text-[12px] sm:text-[14px] dark:text-white">
               All
               <span className="hidden md:inline"> Products</span>
             </div>
 
             {/* Line to show it is active category */}
             <div
-              className={`absolute h-0.75 left-0 right-0 duration-75 bottom-0 ${selectedCategory === "all" ? "bg-indigo-600" : "bg-slate-100"}`}
+              className={`absolute h-0.75 left-0 right-0 duration-75 bottom-0 ${selectedCategory === "all" ? "bg-indigo-600 dark:bg-indigo-400" : "bg-slate-100 dark:bg-indigo-800"}`}
             ></div>
           </button>
 
@@ -59,7 +59,7 @@ export const CategoryList = () => {
                 className="min-w-max w-40! sm:w-45.75! lg:w-50!"
                 key={cat.id}
               >
-                <div className="border border-[#e5e7eb] bg-white hover:bg-gray-50 relative overflow-hidden active:scale-95 duration-75 cursor-pointer px-1.25 sm:px-2.5 py-1.25 rounded-md shadow-sm">
+                <div className="border border-[#e5e7eb] dark:border-indigo-700 bg-white dark:bg-indigo-800 hover:bg-gray-50 dark:hover:bg-indigo-700 relative overflow-hidden active:scale-95 duration-75 cursor-pointer px-1.25 sm:px-2.5 py-1.25 rounded-md shadow-sm">
                   <button
                     onClick={() => dispatch(setSelectedCategory(cat.id))}
                     type="button"
@@ -73,13 +73,13 @@ export const CategoryList = () => {
                       />
                     </div>
 
-                    <p className="font-semibold text-[12px] sm:text-[14px]">
+                    <p className="font-semibold text-[12px] sm:text-[14px] dark:text-white">
                       {cat.name}
                     </p>
 
                     {/* Line to show it is active category */}
                     <div
-                      className={`absolute h-0.75 left-0 right-0 duration-100 bottom-0 ${selectedCategory === cat.id ? "bg-indigo-600" : "bg-slate-100"}`}
+                      className={`absolute h-0.75 left-0 right-0 duration-100 bottom-0 ${selectedCategory === cat.id ? "bg-indigo-600 dark:bg-indigo-400" : "bg-slate-100 dark:bg-indigo-800"}`}
                     ></div>
                   </button>
                 </div>
@@ -87,13 +87,13 @@ export const CategoryList = () => {
             ))}
           </Swiper>
 
-          <div className="hover:bg-indigo-200 rounded-sm duration-150">
+          <div className="hover:bg-indigo-200 dark:hover:bg-indigo-400 rounded-sm duration-150">
             <button
               type="button"
               aria-label="Next"
               className="swiper-button-next active:scale-95 hover:scale-110 duration-150"
             >
-              <BiChevronRight />
+              <BiChevronRight className="dark:text-white" />
             </button>
           </div>
         </motion.div>

@@ -9,13 +9,13 @@ export const MainLayout = () => {
   const isLoading = navigation.state === "loading";
 
   return (
-    <div className="p-1.25 font-montserrat bg-gray-100">
+    <div className="p-1.25 font-montserrat bg-gray-100 dark:bg-gray-950">
       <Header />
 
       <div className="flex gap-1.25 relative">
         {/* <Sidebar /> */}
 
-        <main className="bg-white flex-1 rounded-md relative min-h-[calc(100vh-77px)] max-h-[calc(100vh-77px)] shadow-sm overflow-y-auto overflow-x-hidden mt-1.25">
+        <main className="bg-white dark:bg-gray-900 flex-1 rounded-md relative min-h-[calc(100vh-75px)] max-h-[calc(100vh-77px)] shadow-sm overflow-y-auto overflow-x-hidden mt-1.25">
           {isLoading ? (
             <LoadingPage />
           ) : (
