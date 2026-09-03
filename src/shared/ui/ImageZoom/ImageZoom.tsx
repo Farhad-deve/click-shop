@@ -1,4 +1,4 @@
-import { useEffect, useState, type MouseEvent, type TouchEvent } from "react";
+import { useState, type MouseEvent, type TouchEvent } from "react";
 import { BiSearch, BiX } from "react-icons/bi";
 
 interface ImageZoomProps {
@@ -36,8 +36,8 @@ export const ImageZoom = ({ src, alt, zoomLevel = 2 }: ImageZoomProps) => {
   return (
     <div
       className={`relative w-full h-full overflow-hidden bg-white touch-none cursor-zoom-in`}
-      onMouseEnter={() => setIsZoomed(true)}
-      onMouseLeave={() => setIsZoomed(false)}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
       onMouseMove={handleMouseMove}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
@@ -50,6 +50,7 @@ export const ImageZoom = ({ src, alt, zoomLevel = 2 }: ImageZoomProps) => {
         }`}
       />
 
+      {/* When user hovers the image, this element appears and doubles the image size */}
       {isZoomed && (
         <div
           className="absolute inset-0"
@@ -62,12 +63,15 @@ export const ImageZoom = ({ src, alt, zoomLevel = 2 }: ImageZoomProps) => {
         ></div>
       )}
 
+      {/* Hint for users that says image is zoomable */}
       {!isZoomed && (
-        <div className="absolute bottom-2.5 right-2.5 w-8 h-8 flex justify-center items-center bg-black/40 backdrop-blur-[2px] pointer-events-none rounded-md">
-          <BiSearch />
+        <div
+          className="absolute bottom-2.5 right-2.5 w-8 h-8 flex justify-center items-center bg-black/40 backdrop-blur-[2px] pointer-events-none rounded-md">
+            <BiSearch />
         </div>
       )}
 
+      {/* Close button appears when user touches the image, For mobile */}
       {isZoomed && (
         <button
           type="button"

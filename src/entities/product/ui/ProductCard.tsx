@@ -1,10 +1,10 @@
 import { MdOutlineAddShoppingCart } from "react-icons/md"; 
-import { BiHeart } from "react-icons/bi"; 
 import type { Product } from "../model/types";
 import { calculatedOldPrice, DEFAULT_DISCOUNT_PERCENT } from "../lib/calculatedOldPrice";
 import { StarRating } from "../../../shared/ui/StarRating";
 import { formatPrice } from '../../../shared/lib/utils'
 import { Link } from "react-router-dom";
+import { FavoriteButton } from "../../../features/add-to-favorite";
 
 interface ProductCardProps {
   product: Product;
@@ -19,9 +19,7 @@ export const ProductCard = ({ product, categoryName }: ProductCardProps) => {
     <>
       <Link to={`/products/${product.id}`}>
         <div className="border border-[#e5e7eb] dark:border-indigo-600 cursor-pointer group hover:border-indigo-100 hover:dark:border-indigo-800 h-full duration-100 flex flex-col rounded-md overflow-hidden shadow-sm bg-white relative text-gray-700">
-          <button type="button" onClick={(e) => e.preventDefault()} aria-label="Add to favorites" className="w-8.75 h-8.75 flex justify-center items-center bg-black/20 text-[18px] duration-150 text-white hover:scale-105 border border-gray-200 hover:bg-opacity-15 rounded-full absolute top-1.75 right-1.75 active:scale-100">
-            <BiHeart />
-          </button>
+          <FavoriteButton productId={product.id} className="w-8.75 h-8.75 flex justify-center items-center bg-black/20 text-[18px] duration-150 text-white hover:scale-105 border border-gray-200 hover:bg-opacity-15 rounded-full absolute top-1.75 right-1.75 active:scale-100" />
 
           <div className="absolute text-[12px] font-medium bg-black/40 shadow-sm backdrop-blur-[1px] text-white top-2.5 left-2.5 py-0.5 px-1.25 rounded-sm">
             {categoryName}
@@ -53,7 +51,7 @@ export const ProductCard = ({ product, categoryName }: ProductCardProps) => {
               </div>
 
               <div className="relative active:scale-95 duration-100">
-                <button type="button" aria-label="Add to Cart" className="w-9.5 h-9.5 flex justify-center items-center rounded-lg text-[20px] shadow-sm bg-linear-to-r from-blue-600 to-indigo-500 hover:bg-linear-to-r hover:from-blue-500 hover:to-indigo-600 text-white active:shadow-none active:bg-linear-to-r active:from-blue-600 active:to-indigo-700">
+                <button onClick={(e) => e.preventDefault()} type="button" aria-label="Add to Cart" className="w-9.5 h-9.5 flex justify-center items-center rounded-lg text-[20px] shadow-sm bg-linear-to-r from-blue-600 to-indigo-500 hover:bg-linear-to-r hover:from-blue-500 hover:to-indigo-600 text-white active:shadow-none active:bg-linear-to-r active:from-blue-600 active:to-indigo-700">
                   <MdOutlineAddShoppingCart />
                 </button>
               </div>

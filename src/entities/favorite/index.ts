@@ -1,0 +1,1 @@
+export { toggleFavorite, favoriteReducer } from './model/favoriteSlice';

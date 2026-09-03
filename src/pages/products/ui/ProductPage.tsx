@@ -8,6 +8,7 @@ import { useGetCategoriesQuery } from "../../../entities/category";
 import { Loader } from "../../../shared/ui/Loader";
 import { StarRating } from "../../../shared/ui/StarRating";
 import { ImageZoom } from "../../../shared/ui/ImageZoom";
+import { FavoriteButton } from "../../../features/add-to-favorite";
 
 export const ProductPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -51,9 +52,7 @@ export const ProductPage = () => {
                   </button>
                 </Link>
 
-                <button type="button" className="w-8.75 h-8.75 flex justify-center hover:bg-red-50 dark:hover:bg-red-300 items-center border border-red-400 active:scale-95 text-red-500 font-medium rounded-sm text-[20px]">
-                  <BiHeart />
-                </button>
+                <FavoriteButton productId={product.id} className="w-8.75 h-8.75 flex justify-center hover:bg-red-50 dark:hover:bg-red-300 items-center border border-red-400 active:scale-95 text-red-500 font-medium rounded-sm text-[20px]" />
               </div>
               <hr className="my-1.75 border-[#e5e7eb] dark:border-[#4b5563]" />
             </motion.div>

@@ -6,6 +6,7 @@ import { RevealOnScroll } from "../../../shared/ui/RevealOnScroll";
 export const ProductGrid = () => {
   const { data: products } = useGetProductsQuery();
   const { data: categories } = useGetCategoriesQuery();
+  
   const selectedCategory = useAppSelector(
     (state) => state.categoryFilter.selectedCategory,
   );
