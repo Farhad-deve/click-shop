@@ -28,7 +28,7 @@ export const ProductCard = ({ product, categoryName }: ProductCardProps) => {
           </div>
 
           <div className="flex justify-center items-center p-2.5 border-b border-[#e5e7eb] dark:border-indigo-600">
-            <img loading="lazy" src={product.image} alt={product.name} className="max-h-42.5 min-h-42.5 sm:max-h-50 sm:min-h-50 object-contain" />
+            <img loading="lazy" src={product.image} alt={product.name} className="max-h-42.5 min-h-42.5 sm:max-h-50 sm:min-h-50 w-full h-full object-contain" />
           </div>
 
           <div className="px-2.5 py-1.75 flex flex-col gap-2 justify-between flex-1 bg-slate-50 dark:bg-indigo-900 group-hover:bg-indigo-50 group-hover:dark:bg-indigo-800 duration-100">

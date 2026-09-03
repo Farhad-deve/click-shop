@@ -7,10 +7,12 @@ import { useGetProductByIdQuery } from "../../../entities/product";
 import { useGetCategoriesQuery } from "../../../entities/category";
 import { Loader } from "../../../shared/ui/Loader";
 import { StarRating } from "../../../shared/ui/StarRating";
+import { ImageZoom } from "../../../shared/ui/ImageZoom";
 
 export const ProductPage = () => {
   const { id } = useParams<{ id: string }>();
-  const { data: product, isLoading } = useGetProductByIdQuery(id!);
+  if (!id) return null;
+  const { data: product, isLoading } = useGetProductByIdQuery(id);
   const { data: categories } = useGetCategoriesQuery();
 
   if (isLoading || !product) return <Loader />
@@ -22,8 +24,8 @@ export const ProductPage = () => {
       <div className="p-2.5 text-gray-800 w-full lg:w-[95%] mx-auto max-w-350">
         <div className="flex flex-col md:flex-row gap-2.5">
           <div className="flex-1 relative">
-            <div className="w-full h-full border border-[#e5e7eb] dark:border-[#4b5563] rounded-md p-1.25 shadow-sm overflow-hidden">
-              {/* Actually figure element here, but image will here */}
+            <div className="w-full h-full md:max-w-150 md:max-h-125 border border-[#e5e7eb] dark:border-[#4b5563] rounded-md p-1.25 shadow-sm overflow-hidden">
+              <ImageZoom src={product.image} alt={product.name} />
             </div>
             <div className="px-2.5 py-1.25 absolute top-2.5 left-2.5 font-semibold text-[12px] bg-indigo-800/55 rounded-sm text-white flex justify-center items-center">
               {categoryName}
@@ -39,7 +41,7 @@ export const ProductPage = () => {
             >
               <div className="flex justify-between items-center gap-2.5"> 
                 <Link to={"/products"}>
-                  <button type="button" className="px-2.5 py-1.25 font-medium text-[14px] bg-slate-100 dark:bg-indigo-400 dark:text-white rounded-sm text-slate-700 active:scale-95 hover:bg-slate-200 dark:hover: flex justify-center items-center gap-1">
+                  <button type="button" className="px-2.5 py-1.25 font-medium text-[14px] bg-slate-100 dark:bg-indigo-400 dark:text-white rounded-sm text-slate-700 active:scale-95 hover:bg-slate-200 dark:hover:bg-indigo-600 flex justify-center items-center gap-1">
                     <div>
                       <BiArrowBack />
                     </div>
@@ -73,7 +75,7 @@ export const ProductPage = () => {
                 transition={{ duration: 0.5, delay: 0.5 }}
               >
                 <h4 className="font-semibold text-[14px] dark:text-white">Description:</h4>
-                <p className="text-[12px] lg:text-[14px] font-medium dark:text-gray-500">
+                <p className="text-[14px] lg:text-[16px] font-medium dark:text-gray-400">
                   {product.description}
                 </p>
               </motion.div>
@@ -90,7 +92,7 @@ export const ProductPage = () => {
                 </div>
 
                 <div className="flex gap-1 items-center">
-                  <span className="font-medium">{product.rate}</span>
+                  <span className="font-medium dark:text-white">{product.rate}</span>
                   <span className="text-orange-500">
                     <div className="flex space-x-1">
                       <StarRating rating={product.rate} />
