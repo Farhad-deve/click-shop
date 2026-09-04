@@ -4,8 +4,11 @@ import { Link } from "react-router-dom";
 import { motion } from 'motion/react';
 import Logo from '/logo.jpg'
 import { ThemeToggle } from "../../../features/theme-toggle";
+import { useAppSelector } from "../../../shared/lib/hooks";
 
 export const Header = () => {
+  const favoriteCount = useAppSelector((state) => state.favorite.ids.length);
+
   return (
     <motion.header
       className="bg-white dark:bg-indigo-950 border border-[#e5e7eb] dark:border-indigo-950 rounded-lg max-h-15 min-h-15 flex justify-between items-center gap-1 p-2 sm:p-3.75 shadow-sm"
@@ -31,8 +34,8 @@ export const Header = () => {
         
         <Link to="/favorites" className="flex dark:text-white group text-[22px] relative justify-center items-center gap-1.25">
           <FiHeart />
-          <span className="text-[12px] absolute -top-2.5 pt-0.5 -right-2.5 font-semibold flex justify-center items-center w-5 h-5 bg-indigo-600 rounded-full text-white">
-            0
+          <span className={`text-[12px] text-white absolute -top-2.5 pt-0.5 -right-2.5 flex justify-center items-center w-5 h-5 font-semibold bg-indigo-600 rounded-full pointer-events-none transition-all duration-300 ${favoriteCount === 0 ? "opacity-0 translate-y-1.5" : "opacity-100 translate-y-0"}`}>
+            {favoriteCount}
           </span>
         </Link>
 

@@ -78,9 +78,7 @@ export const CategoryList = () => {
                     </p>
 
                     {/* Line to show it is active category */}
-                    <div
-                      className={`absolute h-0.75 left-0 right-0 duration-100 bottom-0 ${selectedCategory === cat.id ? "bg-indigo-600 dark:bg-indigo-400" : "bg-slate-100 dark:bg-indigo-800"}`}
-                    ></div>
+                    <div className={`absolute h-0.75 left-0 right-0 duration-100 bottom-0 ${selectedCategory === cat.id ? "bg-indigo-600 dark:bg-indigo-400" : "bg-slate-100 dark:bg-indigo-800"}`}></div>
                   </button>
                 </div>
               </SwiperSlide>
