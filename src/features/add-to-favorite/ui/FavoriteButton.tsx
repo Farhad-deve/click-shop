@@ -21,7 +21,7 @@ export const FavoriteButton = ({ productId, className }: FavoriteButtonProps) =>
 
     return (
         <>
-            <button type="button" onClick={handleClick} aria-label="Add to favorites" className={className}>
+            <button type="button" onClick={handleClick} aria-label="Add to favorites" className={`${className} ${isFavorite ? "border-red-500" : ""}`}>
                 {isFavorite ? <BiSolidHeart className="text-red-500" /> : <BiHeart />}
             </button>
         </>

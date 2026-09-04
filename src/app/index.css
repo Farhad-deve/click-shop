@@ -22,6 +22,11 @@ button {
   transition-duration: 75ms;
 }
 
+::selection {
+  background-color: #6365f1bf;
+  color: #fff;
+}
+
 /* ---------- Related to swiper ---------- */
 
 .swiper-button-next,

@@ -1,6 +1,6 @@
 import { MdOutlineAddShoppingCart } from "react-icons/md"; 
 import { BiHeart, BiArrowBack } from "react-icons/bi"; 
-import { Link, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { formatPrice } from "../../../shared/lib/utils";
 import { motion } from 'motion/react';
 import { useGetProductByIdQuery } from "../../../entities/product";
@@ -12,6 +12,7 @@ import { FavoriteButton } from "../../../features/add-to-favorite";
 
 export const ProductPage = () => {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
   if (!id) return null;
   const { data: product, isLoading } = useGetProductByIdQuery(id);
   const { data: categories } = useGetCategoriesQuery();
@@ -41,16 +42,14 @@ export const ProductPage = () => {
               transition={{ duration: 0.5 }}
             >
               <div className="flex justify-between items-center gap-2.5"> 
-                <Link to={"/products"}>
-                  <button type="button" className="px-2.5 py-1.25 font-medium text-[14px] bg-slate-100 dark:bg-indigo-400 dark:text-white rounded-sm text-slate-700 active:scale-95 hover:bg-slate-200 dark:hover:bg-indigo-600 flex justify-center items-center gap-1">
-                    <div>
-                      <BiArrowBack />
-                    </div>
-                    <div>
-                      Back
-                    </div>
-                  </button>
-                </Link>
+                <button onClick={() => navigate(-1)} type="button" className="px-2.5 py-1.25 font-medium text-[14px] bg-slate-100 dark:bg-indigo-400 dark:text-white rounded-sm text-slate-700 active:scale-95 hover:bg-slate-200 dark:hover:bg-indigo-600 flex justify-center items-center gap-1">
+                  <div>
+                    <BiArrowBack />
+                  </div>
+                  <div>
+                    Back
+                  </div>
+                </button>      
 
                 <FavoriteButton productId={product.id} className="w-8.75 h-8.75 flex justify-center hover:bg-red-50 dark:hover:bg-red-300 items-center border border-red-400 active:scale-95 text-red-500 font-medium rounded-sm text-[20px]" />
               </div>
@@ -74,7 +73,7 @@ export const ProductPage = () => {
                 transition={{ duration: 0.5, delay: 0.5 }}
               >
                 <h4 className="font-semibold text-[14px] dark:text-white">Description:</h4>
-                <p className="text-[14px] lg:text-[16px] font-medium dark:text-gray-400">
+                <p className="text-[14px] lg:text-[16px] font-medium text-gray-500 dark:text-gray-400">
                   {product.description}
                 </p>
               </motion.div>
@@ -109,17 +108,15 @@ export const ProductPage = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.9 }}
             >
-              <Link to={"/products"} className="block md:hidden">
-                <button type="button" className="px-2.5 py-1.25 font-medium text-[14px] bg-slate-100 rounded-sm text-slate-700 active:scale-95 hover:bg-slate-200 flex justify-center items-center gap-1">
-                  <div>
-                    <BiArrowBack />
-                  </div>
+              <button type="button" onClick={() => navigate(-1)} className="px-2.5 py-1.25 font-medium text-[14px] bg-slate-100 rounded-sm text-slate-700 active:scale-95 hover:bg-slate-200 flex justify-center items-center gap-1 md:hidden">
+                <div>
+                  <BiArrowBack />
+                </div>
 
-                  <div>
-                    Back
-                  </div>
-                </button>
-              </Link>
+                <div>
+                  Back
+                </div>
+              </button>   
 
               <div className="flex justify-end gap-2.5 flex-1">
                 <button type="button" className="w-8.75 h-8.75 flex md:hidden justify-center items-center border border-red-400 active:scale-95 text-red-500 font-medium rounded-sm text-[20px]">

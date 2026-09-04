@@ -17,8 +17,8 @@ export const ProductCard = ({ product, categoryName }: ProductCardProps) => {
 
   return (
     <>
-      <Link to={`/products/${product.id}`}>
-        <div className="border border-[#e5e7eb] dark:border-indigo-600 cursor-pointer group hover:border-indigo-100 hover:dark:border-indigo-800 h-full duration-100 flex flex-col rounded-md overflow-hidden shadow-sm bg-white relative text-gray-700">
+      <Link to={`/products/${product.id}`} className="cursor-auto">
+        <div className="border border-[#e5e7eb] dark:border-indigo-600 group hover:border-indigo-100 hover:dark:border-indigo-800 h-full duration-300 flex flex-col rounded-md overflow-hidden shadow-sm bg-white relative text-gray-700 hover:-translate-y-0.5">
           <FavoriteButton productId={product.id} className="w-8.75 h-8.75 flex justify-center items-center bg-black/20 text-[18px] duration-150 text-white hover:scale-105 border border-gray-200 hover:bg-opacity-15 rounded-full absolute top-1.75 right-1.75 active:scale-100" />
 
           <div className="absolute text-[12px] font-medium bg-black/40 shadow-sm backdrop-blur-[1px] text-white top-2.5 left-2.5 py-0.5 px-1.25 rounded-sm">

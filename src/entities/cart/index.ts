@@ -1,0 +1,1 @@
+export { cartReducer, addToCart } from './model/cartSlice';
