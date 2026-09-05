@@ -1,5 +1,5 @@
-import { MdOutlineAddShoppingCart } from "react-icons/md"; 
-import { BiHeart, BiArrowBack } from "react-icons/bi"; 
+import { MdOutlineAddShoppingCart } from "react-icons/md";
+import { BiHeart, BiArrowBack } from "react-icons/bi";
 import { useNavigate, useParams } from "react-router-dom";
 import { formatPrice } from "../../../shared/lib/utils";
 import { motion } from 'motion/react';
@@ -9,6 +9,9 @@ import { Loader } from "../../../shared/ui/Loader";
 import { StarRating } from "../../../shared/ui/StarRating";
 import { ImageZoom } from "../../../shared/ui/ImageZoom";
 import { FavoriteButton } from "../../../features/add-to-favorite";
+import { AddToCartButton } from "../../../features/add-to-cart";
+import { useAppDispatch, useAppSelector } from "../../../shared/lib/hooks";
+import { addToCart } from "../../../entities/cart";
 
 export const ProductPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -18,6 +21,17 @@ export const ProductPage = () => {
   const { data: categories } = useGetCategoriesQuery();
 
   if (isLoading || !product) return <Loader />
+
+  const dispatch = useAppDispatch();
+  const isInCart = useAppSelector((state) => state.cart.items.find((item) => item.id === id));
+
+  const handleClick = (e: MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    // dispatch(addToCart());
+  };
+
 
   const categoryName = categories?.find((c) => c.id === product?.categoryId)?.name ?? "Uncategorized";
 
@@ -41,7 +55,7 @@ export const ProductPage = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <div className="flex justify-between items-center gap-2.5"> 
+              <div className="flex justify-between items-center gap-2.5">
                 <button onClick={() => navigate(-1)} type="button" className="px-2.5 py-1.25 font-medium text-[14px] bg-slate-100 dark:bg-indigo-400 dark:text-white rounded-sm text-slate-700 active:scale-95 hover:bg-slate-200 dark:hover:bg-indigo-600 flex justify-center items-center gap-1">
                   <div>
                     <BiArrowBack />
@@ -49,7 +63,7 @@ export const ProductPage = () => {
                   <div>
                     Back
                   </div>
-                </button>      
+                </button>
 
                 <FavoriteButton productId={product.id} className="w-8.75 h-8.75 flex justify-center hover:bg-red-50 dark:hover:bg-red-300 items-center border border-red-400 active:scale-95 text-red-500 font-medium rounded-sm text-[20px]" />
               </div>
@@ -101,7 +115,7 @@ export const ProductPage = () => {
             </div>
 
             <motion.hr initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.8 }} className="my-1.75 border-[#e5e7eb] dark:border-[#4b5563]" />
-            
+
             <motion.div
               className="flex justify-between items-center gap-1"
               initial={{ opacity: 0, y: 20 }}
@@ -116,13 +130,16 @@ export const ProductPage = () => {
                 <div>
                   Back
                 </div>
-              </button>   
+              </button>
 
               <div className="flex justify-end gap-2.5 flex-1">
                 <button type="button" className="w-8.75 h-8.75 flex md:hidden justify-center items-center border border-red-400 active:scale-95 text-red-500 font-medium rounded-sm text-[20px]">
                   <BiHeart />
                 </button>
-                <button type="button" className="duration-100 px-2.5 relative py-1.25 flex justify-center items-center gap-1 bg-indigo-600 hover:bg-indigo-700 active:scale-95 text-white font-medium rounded-sm">
+                <button
+                  type="button"
+                  
+                  className="duration-100 px-2.5 relative py-1.25 flex justify-center items-center gap-1 bg-indigo-600 hover:bg-active:scaletext-white font-medium rounded-sm">
                   <span className="text-[18px]">
                     <MdOutlineAddShoppingCart />
                   </span>
