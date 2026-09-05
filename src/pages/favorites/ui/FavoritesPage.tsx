@@ -1,6 +1,4 @@
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
-import { BiArrowBack } from "react-icons/bi";
-import { Link } from "react-router-dom";
 import { motion } from "motion/react";
 import { ProductCard, useGetProductsQuery } from "../../../entities/product";
 import { useAppSelector } from "../../../shared/lib/hooks";
@@ -8,6 +6,7 @@ import { ProductGrid } from "../../../widgets/product-grid";
 import { useGetCategoriesQuery } from "../../../entities/category";
 import { RevealOnScroll } from "../../../shared/ui/RevealOnScroll";
 import { Loader } from "../../../shared/ui/Loader";
+import { GoProductsPageButton } from "../../../shared/ui/GoProductsPage";
 
 export const FavoritesPage = () => {
   const { data: products, isLoading } = useGetProductsQuery();
@@ -38,8 +37,6 @@ export const FavoritesPage = () => {
               autoplay
               className="w-120"
             />
-
-            {/* Heart animation is here */}
           </motion.div>
 
           <motion.p
@@ -56,13 +53,7 @@ export const FavoritesPage = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.5 }}
           >
-            <Link
-              to={"/products"}
-              className="flex justify-center items-center gap-1 px-2.5 py-1.25 bg-slate-100 dark:bg-indigo-400 hover:bg-slate-200 dark:hover:bg-indigo-600 active:bg-slate-300 rounded-md transition-all text-[14px] dark:text-white font-medium"
-            >
-              <BiArrowBack />
-              Products
-            </Link>
+            <GoProductsPageButton />
           </motion.div>
         </div>
       ) : (

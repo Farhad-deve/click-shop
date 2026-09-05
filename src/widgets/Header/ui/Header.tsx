@@ -8,6 +8,7 @@ import { useAppSelector } from "../../../shared/lib/hooks";
 
 export const Header = () => {
   const favoriteCount = useAppSelector((state) => state.favorite.ids.length);
+  const cartCount = useAppSelector((state) => state.cart.items.length);
 
   return (
     <motion.header
@@ -42,13 +43,10 @@ export const Header = () => {
         <Link to="/basket" className="flex group justify-center items-center gap-1.75">
           <div className="flex text-[22px] dark:text-white relative justify-center items-center gap-1.25">
             <BiCartAlt />
-            <span className="text-[12px] absolute -top-2.5 pt-0.5 -right-2.5 font-semibold flex justify-center items-center w-5 h-5 bg-indigo-600 rounded-full text-white">
-              0
+            <span className={`text-[12px] text-white absolute -top-2.5 pt-0.5 -right-2.5 font-semibold flex justify-center items-center w-5 h-5 bg-indigo-600 rounded-full pointer-events-none transition-all duration-300 ${cartCount === 0 ? "opacity-0 translate-y-1.5" : "opacity-100 translate-y-0"}`}>
+              {cartCount}
             </span>
           </div>
-          <span className="text-[14px] dark:text-white font-semibold group-hover:text-indigo-600">
-            $0.00
-          </span>
         </Link>
 
         <ThemeToggle />

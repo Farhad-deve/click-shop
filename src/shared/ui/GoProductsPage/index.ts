@@ -1,0 +1,1 @@
+export { GoProductsPageButton } from './GoProductsPage';

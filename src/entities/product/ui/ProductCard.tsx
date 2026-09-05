@@ -1,10 +1,10 @@
-import { MdOutlineAddShoppingCart } from "react-icons/md"; 
 import type { Product } from "../model/types";
 import { calculatedOldPrice, DEFAULT_DISCOUNT_PERCENT } from "../lib/calculatedOldPrice";
 import { StarRating } from "../../../shared/ui/StarRating";
 import { formatPrice } from '../../../shared/lib/utils'
 import { Link } from "react-router-dom";
 import { FavoriteButton } from "../../../features/add-to-favorite";
+import { AddToCartButton } from "../../../features/add-to-cart";
 
 interface ProductCardProps {
   product: Product;
@@ -50,11 +50,7 @@ export const ProductCard = ({ product, categoryName }: ProductCardProps) => {
                 </div>
               </div>
 
-              <div className="relative active:scale-95 duration-100">
-                <button onClick={(e) => e.preventDefault()} type="button" aria-label="Add to Cart" className="w-9.5 h-9.5 flex justify-center items-center rounded-lg text-[20px] shadow-sm bg-linear-to-r from-blue-600 to-indigo-500 hover:bg-linear-to-r hover:from-blue-500 hover:to-indigo-600 text-white active:shadow-none active:bg-linear-to-r active:from-blue-600 active:to-indigo-700">
-                  <MdOutlineAddShoppingCart />
-                </button>
-              </div>
+              <AddToCartButton id={product.id} name={product.name} image={product.image} price={product.price} />
             </div>
           </div>
         </div>

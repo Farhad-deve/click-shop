@@ -3,6 +3,7 @@ import { baseApi } from "../../shared/api";
 import { categoryFilterReducer } from "../../features/category-filter";
 import { userReducer } from "../../entities/user";
 import { favoriteReducer } from "../../entities/favorite";
+import { cartReducer } from "../../entities/cart";
 
 export const store = configureStore({
     reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
         categoryFilter: categoryFilterReducer,
         user: userReducer,
         favorite: favoriteReducer,
+        cart: cartReducer,
     },
     middleware: (getDefault) => getDefault().concat(baseApi.middleware),
 });
