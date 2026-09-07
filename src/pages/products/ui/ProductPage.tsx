@@ -1,39 +1,40 @@
 import { MdOutlineAddShoppingCart } from "react-icons/md";
 import { BiHeart, BiArrowBack } from "react-icons/bi";
 import { useNavigate, useParams } from "react-router-dom";
-import { formatPrice } from "../../../shared/lib/utils";
 import { motion } from 'motion/react';
+
 import { useGetProductByIdQuery } from "../../../entities/product";
 import { useGetCategoriesQuery } from "../../../entities/category";
+import { useAppDispatch, useAppSelector } from "../../../shared/lib/hooks";
+
 import { Loader } from "../../../shared/ui/Loader";
 import { StarRating } from "../../../shared/ui/StarRating";
 import { ImageZoom } from "../../../shared/ui/ImageZoom";
 import { FavoriteButton } from "../../../features/add-to-favorite";
-import { AddToCartButton } from "../../../features/add-to-cart";
-import { useAppDispatch, useAppSelector } from "../../../shared/lib/hooks";
+
+import { formatPrice } from "../../../shared/lib/utils";
 import { addToCart } from "../../../entities/cart";
+import { NotFoundPage } from "../../not-found";
 
 export const ProductPage = () => {
-  const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+
+  const { id } = useParams<{ id: string }>();
   if (!id) return null;
   const { data: product, isLoading } = useGetProductByIdQuery(id);
   const { data: categories } = useGetCategoriesQuery();
 
-  if (isLoading || !product) return <Loader />
-
   const dispatch = useAppDispatch();
+
   const isInCart = useAppSelector((state) => state.cart.items.find((item) => item.id === id));
-
-  const handleClick = (e: MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-
-    // dispatch(addToCart());
-  };
-
-
   const categoryName = categories?.find((c) => c.id === product?.categoryId)?.name ?? "Uncategorized";
+
+  if (isLoading) return <Loader />;
+  if (!product) return <NotFoundPage />;
+
+  const handleClick = () => {
+    dispatch(addToCart({ id: product.id, name: product.name, image: product.image, price: product.price }));
+  };
 
   return (
     <>
@@ -138,8 +139,9 @@ export const ProductPage = () => {
                 </button>
                 <button
                   type="button"
+                  onClick={handleClick}
+                  className="duration-100 px-2.5 relative py-1.25 flex justify-center items-center gap-1 bg-indigo-600 hover:bg-indigo-700 active:scale-95 text-white font-medium rounded-sm">
                   
-                  className="duration-100 px-2.5 relative py-1.25 flex justify-center items-center gap-1 bg-indigo-600 hover:bg-active:scaletext-white font-medium rounded-sm">
                   <span className="text-[18px]">
                     <MdOutlineAddShoppingCart />
                   </span>
@@ -148,8 +150,8 @@ export const ProductPage = () => {
                     Add to Cart
                   </span>
 
-                  <span className="text-[12px] absolute -top-1.25 pt-px -right-1.75 font-semibold flex justify-center items-center w-5 h-5 bg-orange-500 rounded-full text-white">
-                    1
+                  <span className={`text-[12px] absolute -top-1.25 pt-px -right-1.75 font-semibold flex justify-center items-center w-5 h-5 bg-orange-500 rounded-full text-white transition-all duration-200 pointer-events-none ${isInCart ? "opacity-100 translate-0" : "opacity-0 translate-y-1"}`}>
+                    {isInCart && isInCart.quantity}
                   </span>
                 </button>
               </div>
@@ -160,3 +162,6 @@ export const ProductPage = () => {
     </>
   )
 };
+
+
+

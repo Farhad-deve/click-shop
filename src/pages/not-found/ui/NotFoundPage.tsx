@@ -10,7 +10,7 @@ export const NotFoundPage = () => {
           autoplay
           className="w-120"
         />
-        <h2 className="text-[clamp(1.5rem,1.3vw,2rem)]">Page not found!</h2>
+        <h2 className="text-[clamp(1.5rem,1.3vw,2rem)] dark:text-white">Page not found!</h2>
       </div>
     </>
   );
