@@ -2,7 +2,7 @@ import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { motion } from "motion/react";
 import { ProductCard, useGetProductsQuery } from "../../../entities/product";
 import { useAppSelector } from "../../../shared/lib/hooks";
-import { ProductGrid } from "../../../widgets/product-grid";
+import { ProductGrid } from "../../../widgets/ProductGrid";
 import { useGetCategoriesQuery } from "../../../entities/category";
 import { RevealOnScroll } from "../../../shared/ui/RevealOnScroll";
 import { Loader } from "../../../shared/ui/Loader";

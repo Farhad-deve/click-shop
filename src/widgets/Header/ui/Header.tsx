@@ -4,12 +4,16 @@ import { Link } from "react-router-dom";
 import { motion } from 'motion/react';
 import Logo from '/logo.jpg'
 import { ThemeToggle } from "../../../features/theme-toggle";
-import { useAppSelector } from "../../../shared/lib/hooks";
+import { useAppDispatch, useAppSelector } from "../../../shared/lib/hooks";
 import { SearchAutoComplete } from "../../../features/search-autocomplete";
+import { openLoginModal } from "../../../entities/modal";
 
 export const Header = () => {
   const favoriteCount = useAppSelector((state) => state.favorite.ids.length);
   const cartCount = useAppSelector((state) => state.cart.items.length);
+  const dispatch = useAppDispatch();
+
+  const openModal = () => dispatch(openLoginModal());
 
   return (
     <motion.header
@@ -46,7 +50,7 @@ export const Header = () => {
         <ThemeToggle />
 
         <div>
-          <button type="button" className="btn btn-primary flex justify-center items-center">
+          <button onClick={openModal} type="button" className="btn btn-primary flex justify-center items-center">
             <span className="px-2.5">Login</span>
           </button>
         </div>

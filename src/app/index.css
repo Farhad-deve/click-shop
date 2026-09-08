@@ -21,6 +21,9 @@ button {
   color: #fff;
   transition-duration: 75ms;
 }
+.btn-primary:hover {
+  background-image: linear-gradient(45deg, #6366f1, #2563eb);
+}
 
 ::selection {
   background-color: #6365f1bf;

@@ -1,3 +1,4 @@
+import { LoginModal } from "../features/auth";
 import { Header } from "../widgets/Header";
 // import { Sidebar } from '../widgets/Sidebar';
 import { Main } from "../widgets/Main";
@@ -13,6 +14,8 @@ function App() {
 
           <Main />
         </div>
+
+        <LoginModal />
       </div>
     </>
   );

@@ -1,0 +1,1 @@
+export { openLoginModal, closeLoginModal, modalReducer } from './model/modalSlice';

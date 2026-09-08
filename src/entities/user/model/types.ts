@@ -1,7 +1,9 @@
-export type UserRole = "user" | "admin";
+
 
 export interface User {
   id: string;
+  userName: string;
   email: string;
-  role: UserRole;
+  isActive: boolean;
+  isAdmin: boolean;
 }

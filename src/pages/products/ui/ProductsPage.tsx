@@ -2,8 +2,8 @@ import { useGetCategoriesQuery } from "../../../entities/category";
 import { ProductCard, useGetProductsQuery } from "../../../entities/product";
 import { useAppSelector } from "../../../shared/lib/hooks";
 import { RevealOnScroll } from "../../../shared/ui/RevealOnScroll";
-import { CategoryList } from "../../../widgets/category-list";
-import { ProductGrid } from "../../../widgets/product-grid";
+import { CategoryList } from "../../../widgets/CategoryList";
+import { ProductGrid } from "../../../widgets/ProductGrid";
 
 export const ProductsPage = () => {
   const { data: products } = useGetProductsQuery();
