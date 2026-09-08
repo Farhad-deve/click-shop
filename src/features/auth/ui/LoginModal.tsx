@@ -10,7 +10,7 @@ export const LoginModal = () => {
   const dispatch = useAppDispatch();
   const isOpen = useAppSelector((state) => state.modal.isLoginModalOpen)
   const [showPassword, setShowPassword] = useState(false);
-  const [mode, setMode] = useState<"login" | "signUp">("signUp")
+  const [mode, setMode] = useState<"login" | "signUp">("login")
 
   const onClose = () => dispatch(closeLoginModal());
 
