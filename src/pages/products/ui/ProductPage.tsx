@@ -57,7 +57,7 @@ export const ProductPage = () => {
               transition={{ duration: 0.5 }}
             >
               <div className="flex justify-between items-center gap-2.5">
-                <button onClick={() => navigate(-1)} type="button" className="px-2.5 py-1.25 font-medium text-[14px] bg-slate-100 dark:bg-indigo-400 dark:text-white rounded-sm text-slate-700 active:scale-95 hover:bg-slate-200 dark:hover:bg-indigo-600 flex justify-center items-center gap-1">
+                <button onClick={() => navigate(-1)} aria-label="Back" type="button" className="px-2.5 py-1.25 font-medium text-[14px] bg-slate-100 dark:bg-indigo-400 dark:text-white rounded-sm text-slate-700 active:scale-95 hover:bg-slate-200 dark:hover:bg-indigo-600 flex justify-center items-center gap-1">
                   <div>
                     <BiArrowBack />
                   </div>

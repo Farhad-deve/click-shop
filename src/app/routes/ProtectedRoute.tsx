@@ -7,9 +7,9 @@ interface ProtectedRouteProps {
 }
 
 export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
-  const role = useAppSelector((state) => state.user.role);
+  const isAdmin = useAppSelector((state) => state.user.currentUser?.isAdmin);
 
-  if (role !== "admin") {
+  if (!isAdmin) {
     return <NotFoundPage />;
   }
 

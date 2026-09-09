@@ -1,9 +1,12 @@
+import { useAuthInit } from "../entities/user";
 import { LoginModal } from "../features/auth";
 import { Header } from "../widgets/Header";
 // import { Sidebar } from '../widgets/Sidebar';
 import { Main } from "../widgets/Main";
 
 function App() {
+  useAuthInit();
+
   return (
     <>
       <div className="p-1.25 font-montserrat bg-gray-100 dark:bg-gray-950">
