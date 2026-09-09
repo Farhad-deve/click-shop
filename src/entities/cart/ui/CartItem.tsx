@@ -29,7 +29,7 @@ export const CartItem = (cartItem: CartItemProps) => {
     <div className="flex relative justify-between items-center gap-1 border border-[#e5e7eb] dark:bg-indigo-950 rounded-md shadow-sm p-2.5 text-gray-700">
       <button
         type="button"
-        className="absolute top-2 right-2 dark:text-white hover:bg-gray-300 dark:hover:bg-indigo-600 active:scale-95 bg-gray-100 dark:bg-gray-500 w-6.25 h-6.25 rounded-sm transition-all duration-200 flex justify-center items-center"
+        className="absolute top-2 right-2 cursor-pointer dark:text-white hover:bg-gray-300 dark:hover:bg-indigo-600 active:scale-95 bg-gray-100 dark:bg-gray-500 w-6.25 h-6.25 rounded-sm transition-all duration-200 flex justify-center items-center"
         onClick={removeItem}
       >
         <BiX />
@@ -67,7 +67,7 @@ export const CartItem = (cartItem: CartItemProps) => {
         <div className="border border-[#e5e7eb] dark:border-indigo-300 p-0.5 font-semibold flex justify-between gap-1 items-center rounded-full">
           <button
             type="button"
-            className="min-w-5 sm:min-w-7.5 h-6.25 rounded-l-full rounded-r-sm flex justify-center items-center transition-all duration-200 dark:text-white hover:bg-gray-100 dark:hover:bg-indigo-500 active:scale-95"
+            className="min-w-5 sm:min-w-7.5 h-6.25 rounded-l-full rounded-r-sm cursor-pointer flex justify-center items-center transition-all duration-200 dark:text-white hover:bg-gray-100 dark:hover:bg-indigo-500 active:scale-95"
             onClick={decrement}
           >
             -
@@ -79,7 +79,7 @@ export const CartItem = (cartItem: CartItemProps) => {
 
           <button
             type="button"
-            className="min-w-5 sm:min-w-7.5 h-6.25 rounded-r-full rounded-l-sm flex justify-center items-center transition-all duration-200 dark:text-white hover:bg-gray-100 dark:hover:bg-indigo-500 active:scale-95"
+            className="min-w-5 sm:min-w-7.5 h-6.25 rounded-r-full rounded-l-sm cursor-pointer flex justify-center items-center transition-all duration-200 dark:text-white hover:bg-gray-100 dark:hover:bg-indigo-500 active:scale-95"
             onClick={increment}
           >
             +

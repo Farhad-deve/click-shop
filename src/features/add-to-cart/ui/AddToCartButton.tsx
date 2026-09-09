@@ -28,7 +28,7 @@ export const AddToCartButton = ({ id, name, image, price } : Product) => {
           onClick={handleClick}
           type="button"
           aria-label="Add to Cart"
-          className="w-9.5 h-9.5 flex justify-center items-center rounded-lg text-[20px] shadow-sm bg-linear-to-r from-blue-600 to-indigo-500 hover:bg-linear-to-r hover:from-blue-500 hover:to-indigo-600 text-white active:shadow-none active:bg-linear-to-r active:from-blue-600 active:to-indigo-700"
+          className="w-9.5 h-9.5 flex justify-center items-center cursor-pointer rounded-lg text-[20px] shadow-sm bg-linear-to-r from-blue-600 to-indigo-500 hover:bg-linear-to-r hover:from-blue-500 hover:to-indigo-600 text-white active:shadow-none active:bg-linear-to-r active:from-blue-600 active:to-indigo-700"
         >
           <MdOutlineAddShoppingCart />
         </button>

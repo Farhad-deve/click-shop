@@ -5,16 +5,23 @@ import { BiX } from "react-icons/bi";
 import { useAppDispatch, useAppSelector } from "../../../shared/lib/hooks";
 import { closeLoginModal } from "../../../entities/modal";
 import { useState, type SubmitEvent } from "react";
-import { useLoginMutation, useRegisterMutation } from "../../../entities/user/api/usersApi";
+import {
+  useLoginMutation,
+  useRegisterMutation,
+} from "../../../entities/user/api/usersApi";
+import { toast } from "react-toastify";
+import { setUserLoggedIn, setUserRegistered } from "../../../entities/user";
+import { getErrorMessage } from "../../../shared/lib/utils";
 
 export const LoginModal = () => {
   const dispatch = useAppDispatch();
   const isOpen = useAppSelector((state) => state.modal.isLoginModalOpen);
-  const [showPassword, setShowPassword] = useState(false);
-  const [mode, setMode] = useState<"login" | "signUp">("login");
+
   const [login, { isLoading: isLoginLoading }] = useLoginMutation();
   const [register, { isLoading: isRegisterLoading }] = useRegisterMutation();
 
+  const [mode, setMode] = useState<"login" | "signUp">("login");
+  const [showPassword, setShowPassword] = useState(false);
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -23,22 +30,31 @@ export const LoginModal = () => {
 
   const handleLogin = async (e: SubmitEvent) => {
     e.preventDefault();
+
     try {
-      const result = await login({ email, password }).unwrap();
-      console.log(result);
-      
+      const response = await login({ email, password }).unwrap();
+      if (!response) {
+        return;
+      }
+      dispatch(setUserLoggedIn(response));
+      toast.success("You have successfully logged in");
+      onClose();
     } catch (error) {
-      console.error(error);
+      toast.error(getErrorMessage(error));
     }
   };
 
   const handleSignUp = async (e: SubmitEvent) => {
     e.preventDefault();
+
     try {
-      const result = await register({ email, password, userName }).unwrap();
-      console.log(result);
+      const response = await register({ email, password, userName }).unwrap();
+      if (!response) return;
+      dispatch(setUserRegistered(response));
+      toast.success("You have successfully registered");
+      onClose();
     } catch (error) {
-      console.error(error);
+      toast.error(getErrorMessage(error));
     }
   };
 
@@ -51,7 +67,7 @@ export const LoginModal = () => {
         <button
           onClick={onClose}
           type="button"
-          className="hover:bg-gray-300 active:scale-95 bg-gray-100 w-6.25 h-6.25 rounded-sm flex justify-center items-center"
+          className="hover:bg-gray-300 active:scale-95 bg-gray-100 w-6.25 h-6.25 cursor-pointer rounded-sm flex justify-center items-center"
         >
           <BiX />
         </button>
@@ -60,7 +76,10 @@ export const LoginModal = () => {
       <hr className="my-1.25 border-[#e5e7eb]" />
 
       <div>
-        <form onSubmit={(e) => handleLogin(e)} className="flex flex-col gap-1.25 text-gray-800">
+        <form
+          onSubmit={mode === "signUp" ? handleSignUp : handleLogin}
+          className="flex flex-col gap-1.25 text-gray-800"
+        >
           {mode === "signUp" && (
             <div className="flex flex-col">
               <label htmlFor="name-input" className="text-[14px] font-medium">
@@ -133,12 +152,12 @@ export const LoginModal = () => {
 
           <button
             type="submit"
-            disabled={isLoginLoading}
+            disabled={isLoginLoading || isRegisterLoading}
             className="cursor-pointer flex justify-center items-center gap-1 bg-indigo-600 w-full hover:bg-indigo-700 active:scale-95 duration-150 text-white font-medium px-2.5 py-1.25 rounded-sm disabled:bg-indigo-400 disabled:cursor-not-allowed disabled:active:scale-100"
           >
             <span>
               {mode === "signUp"
-                ? isLoginLoading
+                ? isRegisterLoading
                   ? "Creating..."
                   : "Create account"
                 : isLoginLoading

@@ -18,7 +18,7 @@ export const CategoryItem = ({ id, image, name }: CategoryItemProps) => {
       <button
         onClick={() => dispatch(setSelectedCategory(id))}
         type="button"
-        className="flex justify-center items-center gap-1 w-full"
+        className="flex justify-center items-center gap-1 w-full cursor-pointer"
       >
         <div>
           <img

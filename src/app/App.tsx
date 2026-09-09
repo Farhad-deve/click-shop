@@ -3,6 +3,8 @@ import { LoginModal } from "../features/auth";
 import { Header } from "../widgets/Header";
 // import { Sidebar } from '../widgets/Sidebar';
 import { Main } from "../widgets/Main";
+import { ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   useAuthInit();
@@ -20,6 +22,8 @@ function App() {
 
         <LoginModal />
       </div>
+
+      <ToastContainer position="bottom-right" theme="colored" autoClose={3000} />
     </>
   );
 }

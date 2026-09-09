@@ -50,7 +50,7 @@ export const Header = () => {
         <ThemeToggle />
 
         <div>
-          <button onClick={openModal} type="button" className="btn btn-primary flex justify-center items-center">
+          <button onClick={openModal} type="button" className="btn btn-primary cursor-pointer flex justify-center items-center">
             <span className="px-2.5">Login</span>
           </button>
         </div>

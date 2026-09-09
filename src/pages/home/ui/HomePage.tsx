@@ -1,6 +1,6 @@
-import { AiOutlineArrowRight } from "react-icons/ai"; 
+import { AiOutlineArrowRight } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import { motion } from 'motion/react';
+import { motion } from "motion/react";
 
 export const HomePage = () => {
   return (
@@ -21,13 +21,13 @@ export const HomePage = () => {
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             transition={{ duration: 0.5, delay: 0.3 }}
           >
-            We have the latest smartphones, modern laptops, computers, and various
-            accessories. Only with us you can buy quality technology at affordable
-            prices!
+            We have the latest smartphones, modern laptops, computers, and
+            various accessories. Only with us you can buy quality technology at
+            affordable prices!
           </motion.p>
           <Link to="/products">
             <motion.button
-              className="pl-5 pr-3.75 text-[16px] py-1.75 flex justify-center items-center gap-1 hover:shadow-lg rounded-full duration-100 bg-linear-to-r from-violet-600 to-indigo-600 hover:bg-indigo-600 active:scale-95 text-white font-medium"
+              className="pl-5 pr-3.75 text-[16px] py-1.75 flex justify-center items-center gap-1 cursor-pointer hover:shadow-lg rounded-full duration-100 bg-linear-to-r from-violet-600 to-indigo-600 hover:bg-indigo-600 active:scale-95 text-white font-medium"
               initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
               animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               transition={{ duration: 0.5, delay: 0.5 }}
@@ -46,6 +46,7 @@ export const HomePage = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.8 }}
         ></motion.div>
+
         <motion.div
           className="w-75 h-75 top-[50%] right-[10%] bg-indigo-500 bg-opacity-30 rounded-full blur-[200px] absolute"
           initial={{ opacity: 0, scale: 0, y: 100 }}
