@@ -1,8 +1,12 @@
-import { BiCartAlt } from "react-icons/bi"; 
-import { FiHeart } from "react-icons/fi";  
+import { FiLogIn } from "react-icons/fi";
+import { MdOutlineAdminPanelSettings } from "react-icons/md";
+import { FaUserCircle } from "react-icons/fa";
+
+import { BiCartAlt } from "react-icons/bi";
+import { FiHeart } from "react-icons/fi";
 import { Link } from "react-router-dom";
-import { motion } from 'motion/react';
-import Logo from '/logo.jpg'
+import { motion } from "motion/react";
+import Logo from "/logo.jpg";
 import { ThemeToggle } from "../../../features/theme-toggle";
 import { useAppDispatch, useAppSelector } from "../../../shared/lib/hooks";
 import { SearchAutoComplete } from "../../../features/search-autocomplete";
@@ -25,24 +29,38 @@ export const Header = () => {
     >
       <div>
         <Link to={"/"}>
-          <img src={Logo} alt="Click Shop" className="h-7.5 sm:h-8.75 object-contain active:scale-95 duration-100" />
+          <img
+            src={Logo}
+            alt="Click Shop"
+            className="h-7.5 sm:h-8.75 object-contain active:scale-95 duration-100"
+          />
         </Link>
       </div>
 
       <nav className="flex justify-end items-center gap-1.5 md:gap-3.75">
         <SearchAutoComplete />
-        
-        <Link to="/favorites" className="flex dark:text-white group text-[22px] relative justify-center items-center gap-1.25">
+
+        <Link
+          to="/favorites"
+          className="flex dark:text-white group text-[22px] relative justify-center items-center gap-1.25"
+        >
           <FiHeart />
-          <span className={`text-[12px] text-white absolute -top-2.5 pt-0.5 -right-2.5 flex justify-center items-center w-5 h-5 font-semibold bg-indigo-600 rounded-full pointer-events-none transition-all duration-300 ${favoriteCount === 0 ? "opacity-0 translate-y-1.5" : "opacity-100 translate-y-0"}`}>
+          <span
+            className={`text-[12px] text-white absolute -top-2.5 pt-0.5 -right-2.5 flex justify-center items-center w-5 h-5 font-semibold bg-indigo-600 rounded-full pointer-events-none transition-all duration-300 ${favoriteCount === 0 ? "opacity-0 translate-y-1.5" : "opacity-100 translate-y-0"}`}
+          >
             {favoriteCount}
           </span>
         </Link>
 
-        <Link to="/basket" className="flex group justify-center items-center gap-1.75">
+        <Link
+          to="/basket"
+          className="flex group justify-center items-center gap-1.75"
+        >
           <div className="flex text-[22px] dark:text-white relative justify-center items-center gap-1.25">
             <BiCartAlt />
-            <span className={`text-[12px] text-white absolute -top-2.5 pt-0.5 -right-2.5 font-semibold flex justify-center items-center w-5 h-5 bg-indigo-600 rounded-full pointer-events-none transition-all duration-300 ${cartCount === 0 ? "opacity-0 translate-y-1.5" : "opacity-100 translate-y-0"}`}>
+            <span
+              className={`text-[12px] text-white absolute -top-2.5 pt-0.5 -right-2.5 font-semibold flex justify-center items-center w-5 h-5 bg-indigo-600 rounded-full pointer-events-none transition-all duration-300 ${cartCount === 0 ? "opacity-0 translate-y-1.5" : "opacity-100 translate-y-0"}`}
+            >
               {cartCount}
             </span>
           </div>
@@ -51,11 +69,65 @@ export const Header = () => {
         <ThemeToggle />
 
         <div>
-          <button onClick={openModal} type="button" className="btn btn-primary cursor-pointer flex justify-center items-center">
-            <span className="px-2.5">Login</span>
-          </button>
+          {currentUser ? (
+            <div className="relative menu">
+              <button
+                type="button"
+                className="btn btn-primary flex justify-center items-center gap-1 cursor-pointer"
+              >
+                <span className="text-[16px]">
+                  <FaUserCircle />
+                </span>
+                <span>
+                  {currentUser.isAdmin ? "Admin" : "Profile"}
+                </span>
+              </button>
 
-          {/* Here goes profile button or admin button */}
+              <div className="absolute menu flex flex-col gap-1 bg-white p-1.75 text-gray-600 rounded-sm border border-[#e5e7eb] top-10 shadow-md z-5 min-w-37.5 -right-3">
+                <button
+                  type="button"
+                  className="text-[14px] cursor-pointer font-medium flex p-1.25 rounded-sm hover:bg-slate-100 justify-start items-center gap-1 active:scale-95"
+                >
+                  <span>
+                    <FaUserCircle />
+                  </span>
+                  <span className="text-nowrap">
+                    {/* Name comes here */}
+                    {currentUser.userName}
+                  </span>
+                </button>
+
+                <div>
+                  <hr className="mb-0.75 border-[#e5e7eb]" />
+                  <button
+                    type="button"
+                    className="flex justify-start cursor-pointer hover:bg-slate-100 p-1.25 rounded-sm items-center gap-1 text-blue-600 w-full hover:text-blue-700 active:scale-95"
+                  >
+                    <MdOutlineAdminPanelSettings />
+                    <span className="text-[14px] font-medium">Dashboard</span>
+                  </button>
+                </div>
+
+                <hr className="border-[#e5e7eb]" />
+
+                <button
+                  type="button"
+                  className="flex justify-start cursor-pointer hover:bg-slate-100 p-1.25 rounded-sm items-center gap-1 text-red-500 w-full hover:text-red-600 active:scale-95<FiLogIn />"
+                >
+                  <FiLogIn />
+                  <span className="text-[14px] font-medium">Logout</span>
+                </button>
+              </div>
+            </div>
+          ): (
+            <button
+              onClick={openModal}
+              type="button"
+              className="btn btn-primary cursor-pointer flex justify-center items-center"
+            >
+              <span className="px-2.5">Login</span>
+            </button>
+          )}
         </div>
       </nav>
     </motion.header>
