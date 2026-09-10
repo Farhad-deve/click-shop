@@ -11,6 +11,7 @@ import { openLoginModal } from "../../../entities/modal";
 export const Header = () => {
   const favoriteCount = useAppSelector((state) => state.favorite.ids.length);
   const cartCount = useAppSelector((state) => state.cart.items.length);
+  const currentUser = useAppSelector((state) => state.user.currentUser);
   const dispatch = useAppDispatch();
 
   const openModal = () => dispatch(openLoginModal());
@@ -53,6 +54,8 @@ export const Header = () => {
           <button onClick={openModal} type="button" className="btn btn-primary cursor-pointer flex justify-center items-center">
             <span className="px-2.5">Login</span>
           </button>
+
+          {/* Here goes profile button or admin button */}
         </div>
       </nav>
     </motion.header>

@@ -2,61 +2,21 @@ import { RxEyeClosed, RxEyeOpen } from "react-icons/rx";
 import { Modal } from "../../../shared/ui/Modal";
 import { BiX } from "react-icons/bi";
 
-import { useAppDispatch, useAppSelector } from "../../../shared/lib/hooks";
-import { closeLoginModal } from "../../../entities/modal";
-import { useState, type SubmitEvent } from "react";
-import {
-  useLoginMutation,
-  useRegisterMutation,
-} from "../../../entities/user/api/usersApi";
-import { toast } from "react-toastify";
-import { setUserLoggedIn, setUserRegistered } from "../../../entities/user";
-import { getErrorMessage } from "../../../shared/lib/utils";
+import { useAuthForm } from "../model/useAuthForm";
 
 export const LoginModal = () => {
-  const dispatch = useAppDispatch();
-  const isOpen = useAppSelector((state) => state.modal.isLoginModalOpen);
-
-  const [login, { isLoading: isLoginLoading }] = useLoginMutation();
-  const [register, { isLoading: isRegisterLoading }] = useRegisterMutation();
-
-  const [mode, setMode] = useState<"login" | "signUp">("login");
-  const [showPassword, setShowPassword] = useState(false);
-  const [userName, setUserName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const onClose = () => dispatch(closeLoginModal());
-
-  const handleLogin = async (e: SubmitEvent) => {
-    e.preventDefault();
-
-    try {
-      const response = await login({ email, password }).unwrap();
-      if (!response) {
-        return;
-      }
-      dispatch(setUserLoggedIn(response));
-      toast.success("You have successfully logged in");
-      onClose();
-    } catch (error) {
-      toast.error(getErrorMessage(error));
-    }
-  };
-
-  const handleSignUp = async (e: SubmitEvent) => {
-    e.preventDefault();
-
-    try {
-      const response = await register({ email, password, userName }).unwrap();
-      if (!response) return;
-      dispatch(setUserRegistered(response));
-      toast.success("You have successfully registered");
-      onClose();
-    } catch (error) {
-      toast.error(getErrorMessage(error));
-    }
-  };
+  // Register, Login logic
+  const {
+    email, setEmail,
+    userName, setUserName,
+    password, setPassword,
+    errors,
+    mode, setMode,
+    showPassword, setShowPassword,
+    isLoginLoading, isRegisterLoading,
+    handleLogin, handleSignUp,
+    onClose, isOpen 
+  } = useAuthForm();
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -96,7 +56,9 @@ export const LoginModal = () => {
                 className="outline-none border-2 border-[#e5e7eb] text-[14px] font-medium duration-100 placeholder:text-[14px] hover:border-indigo-100 focus:border-indigo-500 rounded-sm px-1.75 py-0.75"
               />
               <p className="min-h-2.5 leading-3">
-                {/* Error message goes here */}
+                {errors.userName && (
+                  <span className="text-[12px] text-red-500 font-medium">{errors.userName}</span>
+                )}
               </p>
             </div>
           )}
@@ -116,7 +78,9 @@ export const LoginModal = () => {
               className="outline-none border-2 border-[#e5e7eb] text-[14px] font-medium duration-100 placeholder:text-[14px] hover:border-indigo-100 focus:border-indigo-500 rounded-sm px-1.75 py-0.75"
             />
             <p className="min-h-2.5 leading-3">
-              {/* Error message goes here */}
+              {errors.email && (
+                <span className="text-[12px] text-red-500 font-medium">{errors.email}</span>
+              )}
             </p>
           </div>
 
@@ -138,13 +102,15 @@ export const LoginModal = () => {
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute top-0 right-2 bottom-0 text-gray-600"
+                className="absolute top-0 right-2 bottom-0 text-gray-600 cursor-pointer"
               >
                 {showPassword ? <RxEyeOpen /> : <RxEyeClosed />}
               </button>
             </div>
             <p className="min-h-2.5 leading-3">
-              {/* Error message goes here */}
+              {errors.password && (
+                <span className="text-[12px] text-red-500 font-medium">{errors.password}</span>
+              )}
             </p>
           </div>
 

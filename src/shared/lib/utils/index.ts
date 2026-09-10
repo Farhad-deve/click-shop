@@ -1,3 +1,3 @@
 export { formatPrice } from './formatPrice';
 export { getErrorMessage } from './getErrorMessage';
-export { isValidEmail } from './checkEmail';
+export { isValidEmail, isValidLength } from './validation';
