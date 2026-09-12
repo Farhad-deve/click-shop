@@ -1,4 +1,3 @@
-import { useAuthInit } from "../entities/user";
 import { LoginModal } from "../features/auth";
 import { Header } from "../widgets/Header";
 // import { Sidebar } from '../widgets/Sidebar';
@@ -7,7 +6,6 @@ import { ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 
 function App() {
-  useAuthInit();
 
   return (
     <>

@@ -3,20 +3,17 @@ import { CiGrid41 } from "react-icons/ci";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { CategoryItem, useGetCategoriesQuery } from "../../../entities/category";
 import { Navigation } from "swiper/modules";
-import { Loader } from "../../../shared/ui/Loader";
 import { useAppDispatch, useAppSelector } from "../../../shared/lib/hooks";
 import { setSelectedCategory } from "../../../features/category-filter";
 import { motion } from "motion/react";
 
 export const CategoryList = () => {
-  const { data: categories, isLoading } = useGetCategoriesQuery();
+  const { data: categories } = useGetCategoriesQuery();
 
   const dispatch = useAppDispatch();
   const selectedCategory = useAppSelector(
     (state) => state.categoryFilter.selectedCategory,
   );
-
-  if (isLoading) return <Loader />;
 
   return (
     <>

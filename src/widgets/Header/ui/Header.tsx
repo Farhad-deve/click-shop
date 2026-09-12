@@ -4,19 +4,26 @@ import { FaUserCircle } from "react-icons/fa";
 
 import { BiCartAlt } from "react-icons/bi";
 import { FiHeart } from "react-icons/fi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "motion/react";
 import Logo from "/logo.jpg";
 import { ThemeToggle } from "../../../features/theme-toggle";
 import { useAppDispatch, useAppSelector } from "../../../shared/lib/hooks";
 import { SearchAutoComplete } from "../../../features/search-autocomplete";
 import { openLoginModal } from "../../../entities/modal";
+import { logout, useAuthInit } from "../../../entities/user";
+import { useState } from "react";
 
 export const Header = () => {
+  const { isLoading, token } = useAuthInit();
   const favoriteCount = useAppSelector((state) => state.favorite.ids.length);
   const cartCount = useAppSelector((state) => state.cart.items.length);
+
   const currentUser = useAppSelector((state) => state.user.currentUser);
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
+
+  const [isOpen, setIsOpen] = useState(false);
 
   const openModal = () => dispatch(openLoginModal());
 
@@ -69,49 +76,68 @@ export const Header = () => {
         <ThemeToggle />
 
         <div>
-          {currentUser ? (
+          {isLoading ? (
+            <div className="btn btn-primary">
+              <div className="border-[3px] w-4 h-4 rounded-full border-[#e5e7eb] animate-spin border-b-indigo-600"></div>
+            </div>
+          ) : token && currentUser ? (
             <div className="relative menu">
               <button
                 type="button"
-                className="btn btn-primary flex justify-center items-center gap-1 cursor-pointer"
+                onClick={() => setIsOpen(!isOpen)}
+                className="btn btn-primary cursor-pointer"
               >
-                <span className="text-[16px]">
-                  <FaUserCircle />
-                </span>
-                <span>
-                  {currentUser.isAdmin ? "Admin" : "Profile"}
-                </span>
+                <div className="flex justify-center items-center gap-1">
+                  <span className="text-[16px]">
+                    <FaUserCircle />
+                  </span>
+                  <span>{currentUser.isAdmin ? "Admin" : "Profile"}</span>
+                </div>
               </button>
 
-              <div className="absolute menu flex flex-col gap-1 bg-white p-1.75 text-gray-600 rounded-sm border border-[#e5e7eb] top-10 shadow-md z-5 min-w-37.5 -right-3">
+              <div className={`absolute flex flex-col gap-1 bg-white p-1.75 text-gray-600 rounded-sm transition-all duration-300 border border-[#e5e7eb] top-10 shadow-md z-5 min-w-37.5 -right-3 ${isOpen ? "opacity-100 scale-100 pointer-events-auto" : "opacity-0 scale-75 pointer-events-none"}`}>
                 <button
                   type="button"
+                  onClick={() => {
+                    navigate('/profile');
+                    setIsOpen(false);
+                  }}
                   className="text-[14px] cursor-pointer font-medium flex p-1.25 rounded-sm hover:bg-slate-100 justify-start items-center gap-1 active:scale-95"
                 >
                   <span>
                     <FaUserCircle />
                   </span>
                   <span className="text-nowrap">
-                    {/* Name comes here */}
                     {currentUser.userName}
                   </span>
                 </button>
 
-                <div>
-                  <hr className="mb-0.75 border-[#e5e7eb]" />
-                  <button
-                    type="button"
-                    className="flex justify-start cursor-pointer hover:bg-slate-100 p-1.25 rounded-sm items-center gap-1 text-blue-600 w-full hover:text-blue-700 active:scale-95"
-                  >
-                    <MdOutlineAdminPanelSettings />
-                    <span className="text-[14px] font-medium">Dashboard</span>
-                  </button>
-                </div>
+                {currentUser.isAdmin && (
+                  <div>
+                    <hr className="mb-0.75 border-[#e5e7eb]" />
+
+                    <button
+                      type="button"
+                      onClick={() => {
+                        navigate("/admin")
+                        setIsOpen(false)
+                      }}
+                      className="flex justify-start cursor-pointer hover:bg-slate-100 p-1.25 rounded-sm items-center gap-1 text-blue-600 w-full hover:text-blue-700 active:scale-95"
+                    >
+                      <MdOutlineAdminPanelSettings />
+                      <span className="text-[14px] font-medium">Dashboard</span>
+                    </button>
+                  </div>
+                )}
 
                 <hr className="border-[#e5e7eb]" />
 
                 <button
                   type="button"
+                  onClick={() => {
+                    dispatch(logout());
+                    setIsOpen(false);
+                  }}
                   className="flex justify-start cursor-pointer hover:bg-slate-100 p-1.25 rounded-sm items-center gap-1 text-red-500 w-full hover:text-red-600 active:scale-95<FiLogIn />"
                 >
                   <FiLogIn />
@@ -119,7 +145,7 @@ export const Header = () => {
                 </button>
               </div>
             </div>
-          ): (
+          ) : (
             <button
               onClick={openModal}
               type="button"

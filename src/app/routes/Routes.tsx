@@ -1,13 +1,13 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
+import { ProtectedRoute } from "./ProtectedRoute";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
     children: [
-      {
-        index: true,
+      { index: true,
         lazy: async () => {
           const { HomePage } = await import("../../pages/home");
           return { Component: HomePage };
@@ -47,6 +47,18 @@ export const router = createBrowserRouter([
           const { ProfilePage } = await import("../../pages/profile");
           return { Component: ProfilePage };
         },
+      },
+      {
+        path: "admin",
+        lazy: async () => {
+          const { AdminPage } = await import("../../pages/admin");
+          const ProtectedAdminPage = () => (
+            <ProtectedRoute>
+              <AdminPage />
+            </ProtectedRoute>
+          )
+          return { Component: ProtectedAdminPage };
+        }
       },
       {
         path: "*",

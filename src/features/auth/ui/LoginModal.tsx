@@ -7,15 +7,15 @@ import { useAuthForm } from "../model/useAuthForm";
 export const LoginModal = () => {
   // Register, Login logic
   const {
-    email, setEmail,
-    userName, setUserName,
-    password, setPassword,
+    // mode, setMode,
+    // showPassword, setShowPassword,
+    // isLoginLoading, isRegisterLoading,
+    onClose, isOpen,
     errors,
-    mode, setMode,
-    showPassword, setShowPassword,
-    isLoginLoading, isRegisterLoading,
-    handleLogin, handleSignUp,
-    onClose, isOpen 
+    mode,
+    register,
+    handleSubmit,
+    reset,
   } = useAuthForm();
 
   return (
@@ -37,7 +37,6 @@ export const LoginModal = () => {
 
       <div>
         <form
-          onSubmit={mode === "signUp" ? handleSignUp : handleLogin}
           className="flex flex-col gap-1.25 text-gray-800"
         >
           {mode === "signUp" && (
@@ -50,8 +49,7 @@ export const LoginModal = () => {
                 name="userName"
                 id="name-input"
                 autoComplete="username"
-                value={userName}
-                onChange={(e) => setUserName(e.target.value)}
+                {...register("userName")}
                 placeholder="Enter the name"
                 className="outline-none border-2 border-[#e5e7eb] text-[14px] font-medium duration-100 placeholder:text-[14px] hover:border-indigo-100 focus:border-indigo-500 rounded-sm px-1.75 py-0.75"
               />
