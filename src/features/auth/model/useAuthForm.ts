@@ -5,14 +5,13 @@ import {
 import { useAppDispatch, useAppSelector } from "../../../shared/lib/hooks";
 import { closeLoginModal } from "../../../entities/modal";
 
-import {
-  loginSchema,
-  signUpSchema,
-  type LoginFormData,
-  type SignUpFormData,
-} from "./authSchema";
+import { authSchema, type AuthFormData } from "./authSchema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
+import { setUserLoggedIn } from "../../../entities/user";
+import { toast } from "react-toastify";
+import { getErrorMessage } from "../../../shared/lib/utils";
 
 export const useAuthForm = () => {
   const dispatch = useAppDispatch();
@@ -23,22 +22,49 @@ export const useAuthForm = () => {
 
   const onClose = () => dispatch(closeLoginModal());
 
-  return {
-    onClose, isOpen
-  }
-};
-
-export const useAuthForm = (mode: "login" | "signUp") => {
-  const schema = mode === "signUp" ? signUpSchema : loginSchema;
+  const [showPassword, setShowPassword] = useState(false);
+  const [mode, setMode] = useState<"login" | "signUp">("login");
 
   const {
-    register,
+    register: registerField,
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<LoginFormData | SignUpFormData>({
-    resolver: zodResolver(schema),
+  } = useForm<AuthFormData>({
+    resolver: zodResolver(authSchema),
   });
 
-  return { register, handleSubmit, errors, reset };
+  const onSubmit = async (data: AuthFormData) => {
+    if (mode === "signUp" && (!data.userName || data.userName.length < 3)) {
+      return;
+    }
+
+    try {
+      const response = await login(data).unwrap();
+      dispatch(setUserLoggedIn(response));
+      toast("You have successfully logged in");
+      onClose();
+      reset();
+    } catch (error) {
+      toast(getErrorMessage(error));
+    }
+  };
+
+  return {
+    registerField,
+    handleSubmit,
+    errors,
+    reset,
+    onClose,
+    isOpen,
+    onSubmit,
+    showPassword,
+    setShowPassword,
+    mode,
+    setMode,
+    login,
+    register,
+    isLoginLoading,
+    isRegisterLoading,
+  };
 };

@@ -5,18 +5,17 @@ import { BiX } from "react-icons/bi";
 import { useAuthForm } from "../model/useAuthForm";
 
 export const LoginModal = () => {
-  // Register, Login logic
   const {
-    // mode, setMode,
-    // showPassword, setShowPassword,
-    // isLoginLoading, isRegisterLoading,
-    onClose, isOpen,
+    mode, setMode,
+    showPassword, setShowPassword,
+    isLoginLoading, isRegisterLoading,
+    onClose, isOpen, onSubmit,
     errors,
-    mode,
-    register,
+    registerField,
     handleSubmit,
-    reset,
   } = useAuthForm();
+
+  
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -36,9 +35,7 @@ export const LoginModal = () => {
       <hr className="my-1.25 border-[#e5e7eb]" />
 
       <div>
-        <form
-          className="flex flex-col gap-1.25 text-gray-800"
-        >
+        <form className="flex flex-col gap-1.25 text-gray-800" onSubmit={handleSubmit(onSubmit)}>
           {mode === "signUp" && (
             <div className="flex flex-col">
               <label htmlFor="name-input" className="text-[14px] font-medium">
@@ -46,16 +43,15 @@ export const LoginModal = () => {
               </label>
               <input
                 type="text"
-                name="userName"
                 id="name-input"
                 autoComplete="username"
-                {...register("userName")}
+                {...registerField("userName")}
                 placeholder="Enter the name"
                 className="outline-none border-2 border-[#e5e7eb] text-[14px] font-medium duration-100 placeholder:text-[14px] hover:border-indigo-100 focus:border-indigo-500 rounded-sm px-1.75 py-0.75"
               />
               <p className="min-h-2.5 leading-3">
                 {errors.userName && (
-                  <span className="text-[12px] text-red-500 font-medium">{errors.userName}</span>
+                  <span className="text-[12px] text-red-500 font-medium">{errors.userName?.message}</span>
                 )}
               </p>
             </div>
@@ -67,17 +63,15 @@ export const LoginModal = () => {
             </label>
             <input
               type="email"
-              name="email"
               id="email-input"
               autoComplete="email"
               placeholder="Enter the email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              {...registerField("email")}
               className="outline-none border-2 border-[#e5e7eb] text-[14px] font-medium duration-100 placeholder:text-[14px] hover:border-indigo-100 focus:border-indigo-500 rounded-sm px-1.75 py-0.75"
             />
             <p className="min-h-2.5 leading-3">
               {errors.email && (
-                <span className="text-[12px] text-red-500 font-medium">{errors.email}</span>
+                <span className="text-[12px] text-red-500 font-medium">{errors.email.message}</span>
               )}
             </p>
           </div>
@@ -89,12 +83,10 @@ export const LoginModal = () => {
             <div className="relative">
               <input
                 type={showPassword ? "text" : "password"}
-                name="password"
                 id="password-input"
                 placeholder="Enter the password"
                 autoComplete="current-password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                {...registerField("password")}
                 className="outline-none w-full text-[14px] font-medium border-2 border-[#e5e7eb] duration-100 placeholder:text-[14px] hover:border-indigo-100 focus:border-indigo-500 rounded-sm px-1.75 py-0.75"
               />
               <button
@@ -107,7 +99,7 @@ export const LoginModal = () => {
             </div>
             <p className="min-h-2.5 leading-3">
               {errors.password && (
-                <span className="text-[12px] text-red-500 font-medium">{errors.password}</span>
+                <span className="text-[12px] text-red-500 font-medium">{errors.password.message}</span>
               )}
             </p>
           </div>
