@@ -1,11 +1,14 @@
+import { useLocation } from "react-router-dom";
 import { LoginModal } from "../features/auth";
 import { Header } from "../widgets/Header";
-// import { Sidebar } from '../widgets/Sidebar';
 import { Main } from "../widgets/Main";
 import { ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
+import { Sidebar } from "../widgets/Sidebar";
 
 function App() {
+  const location = useLocation();
+  const isAdminRoute = location.pathname.startsWith("/admin");
 
   return (
     <>
@@ -13,7 +16,7 @@ function App() {
         <Header />
 
         <div className="flex gap-1.25 relative">
-          {/* <Sidebar /> */}
+          {isAdminRoute && <Sidebar />}
 
           <Main />
         </div>

@@ -15,8 +15,6 @@ export const LoginModal = () => {
     handleSubmit,
   } = useAuthForm();
 
-  
-
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <div className="flex justify-between items-center">
@@ -114,7 +112,7 @@ export const LoginModal = () => {
             <span>
               {mode === "signUp"
                 ? isRegisterLoading
-                  ? "Creating..."
+                  ? "Creating account..."
                   : "Create account"
                 : isLoginLoading
                   ? "Logging in..."

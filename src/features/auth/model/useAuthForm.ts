@@ -9,7 +9,7 @@ import { authSchema, type AuthFormData } from "./authSchema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
-import { setUserLoggedIn } from "../../../entities/user";
+import { setUserLoggedIn, setUserRegistered } from "../../../entities/user";
 import { toast } from "react-toastify";
 import { getErrorMessage } from "../../../shared/lib/utils";
 
@@ -40,13 +40,23 @@ export const useAuthForm = () => {
     }
 
     try {
-      const response = await login(data).unwrap();
-      dispatch(setUserLoggedIn(response));
-      toast("You have successfully logged in");
+      if (mode === "login") {
+        const response = await login(data).unwrap();
+        dispatch(setUserLoggedIn(response));
+        toast.success("You have successfully logged in");
+      } else if (mode === "signUp") {
+        const response = await register({
+          userName: data.userName!,
+          email: data.email,
+          password: data.password,
+        }).unwrap();
+        dispatch(setUserRegistered(response));
+        toast.success("You have successfully registered");
+      }
       onClose();
       reset();
     } catch (error) {
-      toast(getErrorMessage(error));
+      toast.error(getErrorMessage(error));
     }
   };
 

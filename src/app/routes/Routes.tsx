@@ -45,21 +45,75 @@ export const router = createBrowserRouter([
         path: "profile",
         lazy: async () => {
           const { ProfilePage } = await import("../../pages/profile");
-          return { Component: ProfilePage };
+          const ProtectedProfilePage = () => (
+            <ProtectedRoute>
+              <ProfilePage />
+            </ProtectedRoute>
+          )
+          return { Component: ProtectedProfilePage };
         },
       },
       {
         path: "admin",
         lazy: async () => {
-          const { AdminPage } = await import("../../pages/admin");
+          const { AdminCategoriesPage } = await import("../../pages/admin");
           const ProtectedAdminPage = () => (
             <ProtectedRoute>
-              <AdminPage />
+              <AdminCategoriesPage />
             </ProtectedRoute>
           )
           return { Component: ProtectedAdminPage };
         }
       },
+      {
+        path: "admin/products",
+        lazy: async () => {
+          const { AdminProductsPage } = await import("../../pages/admin")
+          const ProtectedAdminProductsPage = () => (
+            <ProtectedRoute>
+              <AdminProductsPage />
+            </ProtectedRoute>
+          )
+          return { Component: ProtectedAdminProductsPage };
+        }
+      },
+      {
+        path: "admin/create-category",
+        lazy: async () => {
+          const { AdminCreateCategoryPage } = await import("../../pages/admin");
+          const ProtectedAdminCreateCategoryPage = () => (
+            <ProtectedRoute>
+              <AdminCreateCategoryPage />
+            </ProtectedRoute>
+          )
+          return { Component: ProtectedAdminCreateCategoryPage };
+        }
+      },
+      {
+        path: "admin/create-product",
+        lazy: async () => {
+          const { AdminCreateProductPage } = await import("../../pages/admin");
+          const ProtectedAdminCreateProductPage = () => (
+            <ProtectedRoute>
+              <AdminCreateProductPage />
+            </ProtectedRoute>
+          )
+          return { Component: ProtectedAdminCreateProductPage };
+        }
+      },
+      {
+        path: "admin/users",
+        lazy: async () => {
+          const { AdminUsersPage } = await import("../../pages/admin");
+          const ProtectedAdminUsersPage = () => (
+            <ProtectedRoute>
+              <AdminUsersPage />
+            </ProtectedRoute>
+          )
+          return { Component: ProtectedAdminUsersPage };
+        }
+      },
+
       {
         path: "*",
         lazy: async () => {
