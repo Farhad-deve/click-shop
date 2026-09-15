@@ -56,7 +56,7 @@ export const ProductCard = ({ product, categoryName, isAdmin }: ProductCardProps
                   <span className="bg-indigo-200 inline-block px-0.5 rounded-sm">-{DEFAULT_DISCOUNT_PERCENT}%</span>
                 </div>
 
-                <div className="text-[16px] font-bold text-indigo-600 dark:text-indigo-300">
+                <div className="text-[16px] font-bold text-indigo-600 dark:text-indigo-100">
                   <span>$ {formatPrice(product.price)}</span>
                 </div>
               </div>
