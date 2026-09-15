@@ -1,3 +1,4 @@
+import { FaTrash } from "react-icons/fa"; 
 import type { Product } from "../model/types";
 import { calculatedOldPrice, DEFAULT_DISCOUNT_PERCENT } from "../lib/calculatedOldPrice";
 import { StarRating } from "../../../shared/ui/StarRating";
@@ -5,13 +6,15 @@ import { formatPrice } from '../../../shared/lib/utils'
 import { Link } from "react-router-dom";
 import { FavoriteButton } from "../../../features/add-to-favorite";
 import { AddToCartButton } from "../../../features/add-to-cart";
+import { BiEditAlt } from "react-icons/bi";
 
 interface ProductCardProps {
   product: Product;
   categoryName: string;
+  isAdmin?: boolean
 }
 
-export const ProductCard = ({ product, categoryName }: ProductCardProps) => {
+export const ProductCard = ({ product, categoryName, isAdmin }: ProductCardProps) => {
 
   const oldPrice = calculatedOldPrice(product.price);
 
@@ -19,7 +22,15 @@ export const ProductCard = ({ product, categoryName }: ProductCardProps) => {
     <>
       <Link to={`/products/${product.id}`} className="cursor-auto">
         <div className="border border-[#e5e7eb] dark:border-indigo-600 group hover:border-indigo-100 hover:dark:border-indigo-800 h-full duration-300 flex flex-col rounded-md overflow-hidden shadow-sm bg-white relative text-gray-700 hover:-translate-y-0.5">
-          <FavoriteButton productId={product.id} className="w-8.75 h-8.75 flex justify-center items-center cursor-pointer bg-black/20 text-[18px] duration-150 text-white hover:scale-105 border border-gray-200 hover:bg-opacity-15 rounded-full absolute top-1.75 right-1.75 active:scale-100" />
+
+          {isAdmin ? (
+            // BUtton doesn't work at the moment
+            <button type="button" onClick={(e) => {e.preventDefault(), e.stopPropagation()}} className="w-8.75 h-8.75 flex justify-center items-center bg-red-600/15 text-[14px] duration-150 text-red-500 hover:scale-105 border border-red-400 hover:bg-opacity-15 rounded-md absolute top-1.75 right-1.75 active:scale-100 cursor-pointer">
+              <FaTrash />
+            </button>
+          ) : (
+            <FavoriteButton productId={product.id} className="w-8.75 h-8.75 flex justify-center items-center cursor-pointer bg-black/20 text- [18px] duration-150 text-white hover:scale-105 border border-gray-200 hover:bg-opacity-15 rounded-full absolute top-1.75 right-1.75  active:scale-100" />
+          )}
 
           <div className="absolute text-[12px] font-medium bg-black/40 shadow-sm backdrop-blur-[1px] text-white top-2.5 left-2.5 py-0.5 px-1.25 rounded-sm">
             {categoryName}
@@ -50,7 +61,14 @@ export const ProductCard = ({ product, categoryName }: ProductCardProps) => {
                 </div>
               </div>
 
-              <AddToCartButton id={product.id} name={product.name} image={product.image} price={product.price} />
+              {isAdmin ? (
+                // Button doesn't work at the moment
+                <button type="button" onClick={(e) => {e.stopPropagation(), e.preventDefault()}} className="flex justify-center items-center rounded-md font-semibold w-8.75 h-8.75 text-[20px] shadow-sm bg-linear-to-r from-blue-600 to-indigo-500 hover:bg-linear-to-r hover:from-blue-500 hover:to-indigo-600 text-white active:shadow-none active:bg-linear-to-r active:from-blue-600 active:to-indigo-700 cursor-pointer">
+                  <BiEditAlt />
+                </button>
+              ) : (
+                <AddToCartButton id={product.id} name={product.name} image={product.image} price={product.price} />
+              )}
             </div>
           </div>
         </div>
