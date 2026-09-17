@@ -34,7 +34,7 @@ export const Sidebar = () => {
             <motion.h2
               initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
               animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              transition={{ duration: 0.4 }}
+              transition={{ duration: 0.5 }}
             >
               Dashboard
             </motion.h2>
@@ -43,27 +43,25 @@ export const Sidebar = () => {
           <motion.hr 
             initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            transition={{ duration: 0.4, delay: 0.4 }}
+            transition={{ duration: 0.5 }}
             className="my-1.25 border-[#e5e7eb] dark:border-indigo-600"
           />
 
-          <div className="flex flex-col gap-1">
+          <motion.div
+            className="flex flex-col gap-1"
+            initial={{ opacity: 0, y: 20, filter: "blur(4px)"}}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)"}}
+            transition={{ duration: 0.5 }} 
+          >
             {navData.map((item) => (
-              <motion.div
-                key={item.id}
-                initial={{ opacity: 0, y: 20, filter: "blur(4px)"}}
-                animate={{ opacity: 1, y: 0, filter: "blur(0px)"}}
-                transition={{ duration: 0.4, delay: 0.6 }}  
-              >
-                <Link to={item.path}>
-                  <button type="button" className={`${location.pathname === item.path ? "bg-indigo-500 border-indigo-600 text-white hover:bg-indigo-600" : "bg-white dark:bg-indigo-900 text-gray-700 dark:text-white"} hover:bg-indigo-100 dark:hover:bg-indigo-700 hover:border-indigo-200 dark:hover:border-indigo-600 duration-200 py-1.25 px-3.75 border border-[#e5e7eb] dark:border-indigo-700 cursor-pointer active:scale-95 rounded-sm shadow-sm w-full flex justify-start font-semibold items-center gap-1 text-[14px]`}>
-                    {<item.icon size={16} />}
-                    {item.name}
-                  </button>
-                </Link>
-              </motion.div>
+              <Link key={item.id} to={item.path}>
+                <button type="button" className={`${location.pathname === item.path ? "bg-indigo-500 border-indigo-600 text-white hover:bg-indigo-600" : "bg-white dark:bg-indigo-900 text-gray-700 dark:text-white"} hover:bg-indigo-100 dark:hover:bg-indigo-700 hover:border-indigo-200 dark:hover:border-indigo-600 duration-200 py-1.25 px-3.75 border border-[#e5e7eb] dark:border-indigo-700 cursor-pointer active:scale-95 rounded-sm shadow-sm w-full flex justify-start font-semibold items-center gap-1 text-[14px]`}>
+                  {<item.icon size={16} />}
+                  {item.name}
+                </button>
+              </Link>
             ))}
-          </div>
+          </motion.div>
         </div>
 
         <button type="button" aria-label="Toggle sidebar" className="h-10 w-6.25 bg-indigo-500 text-white rounded-sm text-[20px] flex md:hidden justify-center items-center hover:bg-indigo-600 bg-opacity-50 active:scale-95 absolute top-[50%] translate-y-[-50%] -right-7.5">

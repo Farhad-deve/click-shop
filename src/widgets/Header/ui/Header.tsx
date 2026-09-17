@@ -10,7 +10,7 @@ import Logo from "/logo.jpg";
 import { ThemeToggle } from "../../../features/theme-toggle";
 import { useAppDispatch, useAppSelector } from "../../../shared/lib/hooks";
 import { SearchAutoComplete } from "../../../features/search-autocomplete";
-import { openLoginModal } from "../../../entities/modal";
+import { openModal } from "../../../entities/modal";
 import { logout, useAuthInit } from "../../../entities/user";
 import { useState } from "react";
 
@@ -25,7 +25,7 @@ export const Header = () => {
 
   const [isOpen, setIsOpen] = useState(false);
 
-  const openModal = () => dispatch(openLoginModal());
+  const openLoginModal = () => dispatch(openModal({ type: "login" }));
 
   return (
     <motion.header
@@ -147,7 +147,7 @@ export const Header = () => {
             </div>
           ) : (
             <button
-              onClick={openModal}
+              onClick={openLoginModal}
               type="button"
               className="btn btn-primary cursor-pointer flex justify-center items-center"
             >

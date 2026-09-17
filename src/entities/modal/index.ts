@@ -1,1 +1,1 @@
-export { openLoginModal, closeLoginModal, modalReducer } from './model/modalSlice';
+export { openModal, closeModal, modalReducer } from './model/modalSlice';

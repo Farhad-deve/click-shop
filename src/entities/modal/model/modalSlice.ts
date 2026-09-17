@@ -1,25 +1,29 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 interface ModalState {
-  isLoginModalOpen: boolean;
+  type: "login" | "deleteProduct" | null;
+  productId: string | null;
 }
 
-const initialState : ModalState = {
-  isLoginModalOpen: false,
+const initialState: ModalState = {
+  type: null,
+  productId: null,
 };
 
 const modalSlice = createSlice({
   name: "modal",
   initialState,
   reducers: {
-    openLoginModal(state) {
-        state.isLoginModalOpen = true;
+    openModal: (state, action: PayloadAction<{ type: "login" | "deleteProduct"; productId?: string; }>,) => {
+      state.type = action.payload.type;
+      state.productId = action.payload.productId ?? null;
     },
-    closeLoginModal(state) {
-        state.isLoginModalOpen = false;
+    closeModal: (state) => {
+      state.type = null;
+      state.productId = null;
     },
-  }
+  },
 });
 
-export const { openLoginModal, closeLoginModal } = modalSlice.actions;
+export const { openModal, closeModal } = modalSlice.actions;
 export const modalReducer = modalSlice.reducer;

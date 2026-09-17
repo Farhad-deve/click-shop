@@ -23,7 +23,9 @@ export const Modal = ({ isOpen, onClose, children }: ModalProps) => {
           transition={{ duration: 0.3 }}
           className="w-125 z-30 bg-white absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 h-max p-3.75 mx-2.5 rounded-md shadow-sm border border-[#e5e7eb]"
         >
-          {children}
+          <div>
+            {children}
+          </div>
         </motion.div>
       </div>
     </>

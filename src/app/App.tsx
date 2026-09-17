@@ -1,13 +1,20 @@
 import { useLocation } from "react-router-dom";
-import { LoginModal } from "../features/auth";
+import { LoginForm } from "../features/auth";
 import { Header } from "../widgets/Header";
 import { Main } from "../widgets/Main";
 import { ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import { Sidebar } from "../widgets/Sidebar";
+import { Modal } from "../shared/ui/Modal";
+import { useAppDispatch, useAppSelector } from "../shared/lib/hooks";
+import { closeModal } from "../entities/modal";
+import { DeleteProductConfirm } from "../features/delete-product";
 
 function App() {
   const location = useLocation();
+  const modalType = useAppSelector((state) => state.modal.type);
+  const dispatch = useAppDispatch();
+  const onClose = () => dispatch(closeModal());
   const isAdminRoute = location.pathname.startsWith("/admin");
 
   return (
@@ -20,9 +27,12 @@ function App() {
 
           <Main />
         </div>
-
-        <LoginModal />
       </div>
+
+      <Modal isOpen={modalType !== null} onClose={onClose}>
+        {modalType === "login" && <LoginForm />}
+        {modalType === "deleteProduct" && <DeleteProductConfirm />}
+      </Modal>
 
       <ToastContainer position="bottom-right" theme="colored" autoClose={3000} />
     </>

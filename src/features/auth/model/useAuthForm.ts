@@ -2,8 +2,8 @@ import {
   useLoginMutation,
   useRegisterMutation,
 } from "../../../entities/user/api/usersApi";
-import { useAppDispatch, useAppSelector } from "../../../shared/lib/hooks";
-import { closeLoginModal } from "../../../entities/modal";
+import { useAppDispatch } from "../../../shared/lib/hooks";
+import { closeModal } from "../../../entities/modal";
 
 import { authSchema, type AuthFormData } from "./authSchema";
 import { useForm } from "react-hook-form";
@@ -15,12 +15,11 @@ import { getErrorMessage } from "../../../shared/lib/utils";
 
 export const useAuthForm = () => {
   const dispatch = useAppDispatch();
-  const isOpen = useAppSelector((state) => state.modal.isLoginModalOpen);
 
   const [login, { isLoading: isLoginLoading }] = useLoginMutation();
   const [register, { isLoading: isRegisterLoading }] = useRegisterMutation();
 
-  const onClose = () => dispatch(closeLoginModal());
+  const onClose = () => dispatch(closeModal());
 
   const [showPassword, setShowPassword] = useState(false);
   const [mode, setMode] = useState<"login" | "signUp">("login");
@@ -66,7 +65,6 @@ export const useAuthForm = () => {
     errors,
     reset,
     onClose,
-    isOpen,
     onSubmit,
     showPassword,
     setShowPassword,

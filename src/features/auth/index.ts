@@ -1,2 +1,2 @@
-export { LoginModal } from './ui/LoginModal';
+export { LoginForm } from './ui/LoginForm';
 export { useAuthForm } from './model/useAuthForm';

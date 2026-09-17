@@ -1,0 +1,1 @@
+export { DeleteProductConfirm } from './ui/DeleteProductConfirm';

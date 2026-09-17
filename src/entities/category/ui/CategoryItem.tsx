@@ -14,9 +14,11 @@ export const CategoryItem = ({ id, image, name }: CategoryItemProps) => {
   );
 
   return (
-    <div className="border border-[#e5e7eb] dark:border-indigo-700 bg-white dark:bg-indigo-800 hover:bg-gray-50 dark:hover:bg-indigo-700 relative overflow-hidden active:scale-95 duration-75 cursor-pointer px-1.25 sm:px-2.5 py-1.25 rounded-md shadow-sm">
+    <div
+      onClick={() => dispatch(setSelectedCategory(id))}
+      className="border border-[#e5e7eb] dark:border-indigo-700 bg-white dark:bg-indigo-800 hover:bg-gray-50 dark:hover:bg-indigo-700 relative overflow-hidden active:scale-95 duration-75 cursor-pointer px-1.25 sm:px-2.5 py-1.25 rounded-md shadow-sm"
+    >
       <button
-        onClick={() => dispatch(setSelectedCategory(id))}
         type="button"
         className="flex justify-center items-center gap-1 w-full cursor-pointer"
       >

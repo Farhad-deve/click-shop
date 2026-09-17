@@ -7,6 +7,8 @@ import { Link } from "react-router-dom";
 import { FavoriteButton } from "../../../features/add-to-favorite";
 import { AddToCartButton } from "../../../features/add-to-cart";
 import { BiEditAlt } from "react-icons/bi";
+import { useAppDispatch } from "../../../shared/lib/hooks";
+import { openModal } from "../../modal";
 
 interface ProductCardProps {
   product: Product;
@@ -15,6 +17,8 @@ interface ProductCardProps {
 }
 
 export const ProductCard = ({ product, categoryName, isAdmin }: ProductCardProps) => {
+  const dispatch = useAppDispatch();
+  const openConfirmModal = () => dispatch(openModal({ type: "deleteProduct", productId: product.id }));
 
   const oldPrice = calculatedOldPrice(product.price);
 
@@ -24,8 +28,10 @@ export const ProductCard = ({ product, categoryName, isAdmin }: ProductCardProps
         <div className="border border-[#e5e7eb] dark:border-indigo-600 group hover:border-indigo-100 hover:dark:border-indigo-800 h-full duration-300 flex flex-col rounded-md overflow-hidden shadow-sm bg-white relative text-gray-700 hover:-translate-y-0.5">
 
           {isAdmin ? (
-            // BUtton doesn't work at the moment
-            <button type="button" onClick={(e) => {e.preventDefault(), e.stopPropagation()}} className="w-8.75 h-8.75 flex justify-center items-center bg-red-600/15 text-[14px] duration-150 text-red-500 hover:scale-105 border border-red-400 hover:bg-opacity-15 rounded-md absolute top-1.75 right-1.75 active:scale-100 cursor-pointer">
+            <button
+              type="button"
+              onClick={(e) => { e.preventDefault(), e.stopPropagation(), openConfirmModal() }}
+              className="w-8.75 h-8.75 flex justify-center items-center bg-red-600/15 text-[14px] duration-150 text-red-500 hover:scale-105 border border-red-400 hover:bg-opacity-15 rounded-md absolute top-1.75 right-1.75 active:scale-100 cursor-pointer">
               <FaTrash />
             </button>
           ) : (
