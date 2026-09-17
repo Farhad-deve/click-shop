@@ -14,7 +14,7 @@ export const Modal = ({ isOpen, onClose, children }: ModalProps) => {
     <>
       <div
         onClick={onClose}
-        className={`${isOpen ? "block" : "hidden"} fixed z-20 inset-0 bg-black/35 backdrop-blur-[1px] py-5 items-center justify-center overflow-y-auto transition-all duration-250`}
+        className={`${isOpen ? "block" : "hidden"} fixed z-20 inset-0 bg-black/35 backdrop-blur-[1px] py-5 items-center justify-center overflow-y-auto transition-all duration-250 font-montserrat`}
       >
         <motion.div
           onClick={(e) => e.stopPropagation()}

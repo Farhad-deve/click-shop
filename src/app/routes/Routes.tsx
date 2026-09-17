@@ -54,7 +54,7 @@ export const router = createBrowserRouter([
         },
       },
       {
-        path: "admin",
+        path: "admin/categories",
         lazy: async () => {
           const { AdminCategoriesPage } = await import("../../pages/admin");
           const ProtectedAdminPage = () => (

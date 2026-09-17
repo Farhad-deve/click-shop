@@ -17,7 +17,7 @@ interface NavDataType {
 
 export const Sidebar = () => {
   const navData : NavDataType[] = [
-    { id: 1, name: "Categories", path: "/admin", icon: RxDashboard },
+    { id: 1, name: "Categories", path: "/admin/categories", icon: RxDashboard },
     { id: 2, name: "Products", path: "/admin/products", icon: AiOutlineShoppingCart},
     { id: 3, name: "Create category", path: "/admin/create-category", icon: MdOutlineDashboardCustomize},
     { id: 4, name: "Create product", path: "/admin/create-product", icon: MdAddShoppingCart},

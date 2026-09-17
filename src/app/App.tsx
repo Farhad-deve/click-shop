@@ -9,13 +9,14 @@ import { Modal } from "../shared/ui/Modal";
 import { useAppDispatch, useAppSelector } from "../shared/lib/hooks";
 import { closeModal } from "../entities/modal";
 import { DeleteProductConfirm } from "../features/delete-product";
+import { DeleteCategoryConfirm } from "../features/delete-category";
 
 function App() {
   const location = useLocation();
   const modalType = useAppSelector((state) => state.modal.type);
   const dispatch = useAppDispatch();
   const onClose = () => dispatch(closeModal());
-  const isAdminRoute = location.pathname.startsWith("/admin");
+  const isAdminRoute = location.pathname.startsWith("/admin/");
 
   return (
     <>
@@ -32,6 +33,7 @@ function App() {
       <Modal isOpen={modalType !== null} onClose={onClose}>
         {modalType === "login" && <LoginForm />}
         {modalType === "deleteProduct" && <DeleteProductConfirm />}
+        {modalType === "deleteCategory" && <DeleteCategoryConfirm />}
       </Modal>
 
       <ToastContainer position="bottom-right" theme="colored" autoClose={3000} />

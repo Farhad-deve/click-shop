@@ -119,7 +119,7 @@ export const Header = () => {
                     <button
                       type="button"
                       onClick={() => {
-                        navigate("/admin")
+                        navigate("/admin/categories")
                         setIsOpen(false)
                       }}
                       className="flex justify-start cursor-pointer hover:bg-slate-100 p-1.25 rounded-sm items-center gap-1 text-blue-600 w-full hover:text-blue-700 active:scale-95"
