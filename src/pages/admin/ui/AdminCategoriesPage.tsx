@@ -2,9 +2,14 @@ import { BiTrash } from "react-icons/bi";
 import { BiEditAlt } from "react-icons/bi";
 import { useGetCategoriesQuery } from "../../../entities/category";
 import { RevealOnScroll } from "../../../shared/ui/RevealOnScroll";
+import { useAppDispatch } from "../../../shared/lib/hooks";
+import { openModal } from "../../../entities/modal";
 
 export const AdminCategoriesPage = () => {
   const { data: categories } = useGetCategoriesQuery();
+  const dispatch = useAppDispatch();
+
+  const openConfirmModal = (id: string) => dispatch(openModal({ type: "deleteCategory", categoryId: id }));
 
   return (
     <>
@@ -44,7 +49,7 @@ export const AdminCategoriesPage = () => {
 
                       <button
                         type="button"
-                        
+                        onClick={() => openConfirmModal(category.id)}
                         className="cursor-pointer text-[12px] font-semibold flex justify-center  gap-1 items-center px-2.5 py-0.75 rounded-sm border border-red-500 bg-red-500 hover:bg-red-600 hover:shadow-sm duration-75 active:scale-95 text-white"
                       >
                         <div className="flex justify-center items-center text-[14px]">

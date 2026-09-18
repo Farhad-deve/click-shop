@@ -9,14 +9,14 @@ import { getErrorMessage } from "../../../shared/lib/utils";
 export const DeleteCategoryConfirm = () => {
   const dispatch = useAppDispatch();
   const categoryId = useAppSelector((state) => state.modal.categoryId);
-  const [deleteCategory] = useDeleteCategoryMutation();
+  const [deleteCategory, { isLoading: isCategoryDeleting }] = useDeleteCategoryMutation();
   const onClose = () => dispatch(closeModal());
 
   const handleDelete = async () => {
     if (!categoryId) return;
     try {
       await deleteCategory(categoryId).unwrap();
-      toast.success("Product deleted");
+      toast.success("Category deleted");
       onClose();
     } catch (error) {
       toast.error(getErrorMessage(error));
@@ -52,8 +52,13 @@ export const DeleteCategoryConfirm = () => {
           </button>
           <button
             type="button"
-            onClick={handleDelete}
-            className="cursor-pointer text-[12px] font-semibold flex justify-center  gap-1 items-center px-2.5 py-1 rounded-sm border border-red-500 bg-red-500 hover:bg-red-600 hover:shadow-sm duration-75 active:scale-95 text-white"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              handleDelete();
+            }}
+            disabled={isCategoryDeleting}
+            className="cursor-pointer disabled:cursor-not-allowed disabled:border-red-100 disabled:bg-red-100 text-[12px] font-semibold flex justify-center  gap-1 items-center px-2.5 py-1 rounded-sm border border-red-500 bg-red-500 hover:bg-red-600 hover:shadow-sm duration-75 active:scale-95 text-white"
           >
             <div className="flex justify-center items-center text-[14px]">
               <FaTrash />

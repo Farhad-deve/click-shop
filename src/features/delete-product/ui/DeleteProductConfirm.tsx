@@ -9,7 +9,7 @@ import { FaTrash } from "react-icons/fa";
 export const DeleteProductConfirm = () => {
   const dispatch = useAppDispatch();
   const productId = useAppSelector((state) => state.modal.productId);
-  const [deleteProduct] = useDeleteProductMutation();
+  const [deleteProduct, { isLoading : isProductDeleting }] = useDeleteProductMutation();
   const onClose = () => dispatch(closeModal());
 
   const handleDelete = async () => {
@@ -53,7 +53,8 @@ export const DeleteProductConfirm = () => {
           <button
             type="button"
             onClick={handleDelete}
-            className="cursor-pointer text-[12px] font-semibold flex justify-center  gap-1 items-center px-2.5 py-1 rounded-sm border border-red-500 bg-red-500 hover:bg-red-600 hover:shadow-sm duration-75 active:scale-95 text-white"
+            disabled={isProductDeleting}
+            className={`cursor-pointer disabled:cursor-not-allowed disabled:bg-red-100 disabled:border-red-100 text-[12px] font-semibold flex justify-center  gap-1 items-center px-2.5 py-1 rounded-sm border border-red-500 bg-red-500 hover:bg-red-600 hover:shadow-sm duration-75 active:scale-95 text-white`}
           >
             <div className="flex justify-center items-center text-[14px]">
               <FaTrash />

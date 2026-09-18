@@ -26,6 +26,7 @@ const modalSlice = createSlice({
     ) => {
       state.type = action.payload.type;
       state.productId = action.payload.productId ?? null;
+      state.categoryId = action.payload.categoryId ?? null;
     },
     closeModal: (state) => {
       state.type = null;

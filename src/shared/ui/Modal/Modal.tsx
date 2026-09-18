@@ -21,7 +21,7 @@ export const Modal = ({ isOpen, onClose, children }: ModalProps) => {
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3 }}
-          className="w-125 z-30 bg-white absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 h-max p-3.75 mx-2.5 rounded-md shadow-sm border border-[#e5e7eb]"
+          className="max-w-125 w-[90%] z-30 bg-white absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 h-max p-3.75 rounded-md shadow-sm border border-[#e5e7eb]"
         >
           <div>
             {children}
