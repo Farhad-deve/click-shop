@@ -1,5 +1,6 @@
 import { baseApi } from "../../../shared/api";
 import type {
+  AdminUser,
   LoginPayload,
   LoginResponse,
   RegisterPayload,
@@ -8,6 +9,10 @@ import type {
 
 export const usersApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
+    getAllUsers: builder.query<AdminUser[], void>({
+      query: () => "/users/get",
+    }),
+
     getCurrentUser: builder.query<User, void>({
       query: () => `/users/get-one`,
     }),
@@ -30,5 +35,5 @@ export const usersApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useGetCurrentUserQuery, useRegisterMutation, useLoginMutation } =
+export const { useGetCurrentUserQuery, useGetAllUsersQuery, useRegisterMutation, useLoginMutation } =
   usersApi;

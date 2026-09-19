@@ -2,7 +2,9 @@
 
 export const AdminCreateCategoryPage = () => {
   return (
-    <div>AdminCreateCategoryPage</div>
+    <div>
+      AdminCreateCategoryPage
+    </div>
   )
 }
 

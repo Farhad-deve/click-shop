@@ -8,6 +8,16 @@ export interface User {
   isAdmin: boolean;
 }
 
+export interface AdminUser {
+  _id: string;
+  userName: string;
+  email: string;
+  isActive: boolean;
+  isAdmin: boolean;
+  createdAt?: string;
+  orders?: string[];
+}
+
 export interface RegisterPayload {
   userName: string;
   password: string;
