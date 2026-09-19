@@ -4,3 +4,10 @@ export interface Category {
     description: string;
     image: string;
 }
+
+export interface CategoryResponse {
+    id: string;
+    name: string;
+    description: string;
+    image: string;
+}
