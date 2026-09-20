@@ -2,7 +2,7 @@ import { BiX } from "react-icons/bi";
 import { useAppDispatch, useAppSelector } from "../../../shared/lib/hooks";
 import { closeModal } from "../../../entities/modal";
 import { FaTrash } from "react-icons/fa";
-import { useDeleteCategoryMutation } from "../../../entities/category/api/categoryApi";
+import { useDeleteCategoryMutation } from "../../../entities/category";
 import { toast } from "react-toastify";
 import { getErrorMessage } from "../../../shared/lib/utils";
 

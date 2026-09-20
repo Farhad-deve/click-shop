@@ -1,5 +1,5 @@
 import { baseApi } from "../../../shared/api";
-import type { Category, CategoryResponse } from "../model/types";
+import type { Category } from "../model/types";
 
 export const categoryApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -7,12 +7,13 @@ export const categoryApi = baseApi.injectEndpoints({
       query: () => "/categories/get",
       providesTags: ["Category"],
     }),
-    addCategory: builder.mutation<CategoryResponse, FormData>({
+    createCategory: builder.mutation<Category, FormData>({
       query: (formData) => ({
         url: '/categories/add',
         method: 'POST',
         body: formData,
-      })
+      }),
+      invalidatesTags: ['Category'],
     }),
     deleteCategory: builder.mutation<void, string>({
       query: (id) => ({
@@ -24,4 +25,4 @@ export const categoryApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useGetCategoriesQuery, useDeleteCategoryMutation } = categoryApi;
+export const { useGetCategoriesQuery, useDeleteCategoryMutation, useCreateCategoryMutation } = categoryApi;
