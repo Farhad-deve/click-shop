@@ -12,10 +12,15 @@ export const useCreateCategoryForm = () => {
     register,
     handleSubmit,
     formState: { errors },
+    watch,
     reset,
   } = useForm<categoryFormData>({
     resolver: zodResolver(categorySchema),
   });
+
+  const imageFiles = watch("image");
+  const imagePreview = imageFiles?.[0] ? URL.createObjectURL(imageFiles[0]) : null;
+  const imageName = imageFiles?.[0] ? imageFiles[0].name : null;
 
   const onSubmit = async (data: categoryFormData) => {
     const formData = new FormData();
@@ -32,5 +37,5 @@ export const useCreateCategoryForm = () => {
     }
   };
 
-  return { register, handleSubmit, errors, isLoading, onSubmit };
+  return { register, handleSubmit, errors, isLoading, onSubmit, imagePreview, imageName };
 };

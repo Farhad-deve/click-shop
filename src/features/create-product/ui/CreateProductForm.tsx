@@ -1,19 +1,33 @@
 import { BiImage } from "react-icons/bi";
-import { useCreateCategoryForm } from "../model/useCreateCategoryForm";
+import { useCreateProductForm } from "../model/useCreateProductForm";
+import { useGetCategoriesQuery } from "../../../entities/category";
 
-export const CreateCategoryForm = () => {
-  const { register, isLoading, errors, handleSubmit, onSubmit, imagePreview, imageName } = useCreateCategoryForm();
+export const CreateProductForm = () => {
+  const {
+    register,
+    isLoading,
+    errors,
+    handleSubmit,
+    onSubmit,
+    imagePreview,
+    imageName,
+  } = useCreateProductForm();
+  const { data: categories } = useGetCategoriesQuery();
 
   return (
     <div>
       <div className="flex justify-center items-center">
-          {imagePreview ? (
-            <img src={imagePreview} alt="Preview image" className="h-45 p-1.25 object-contain border rounded-sm border-[#e5e7eb]" />            
-          ) : (
-            <div className="w-62.5 h-45 text-gray-500 text-[20px] flex justify-center items-center border border-[#e5e7eb] rounded-sm">
-              <BiImage />
-            </div>
-          )}
+        {imagePreview ? (
+          <img
+            src={imagePreview}
+            alt="Preview image"
+            className="h-45 p-1.25 object-contain border rounded-sm border-[#e5e7eb]"
+          />
+        ) : (
+          <div className="w-62.5 h-45 text-gray-500 text-[20px] flex justify-center items-center border border-[#e5e7eb] rounded-sm">
+            <BiImage />
+          </div>
+        )}
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-1.25 text-gray-800">
@@ -81,6 +95,59 @@ export const CreateCategoryForm = () => {
           <div className="min-h-2.5 leading-3">
             <span className="text-[12px] text-red-500 font-medium">
               {errors.description && errors.description.message}
+            </span>
+          </div>
+        </div>
+
+        <div className="flex flex-col">
+          <label htmlFor="price-input" className="text-[14px] font-semibold">
+            Price
+          </label>
+          <input
+            type="number"
+            id="price-input"
+            {...register("price", { valueAsNumber: true })}
+            className="outline-none border-2 border-[#e5e7eb] text-[14px] font-medium duration-100 placeholder:text-[14px] hover:border-indigo-100 focus:border-indigo-500 rounded-sm px-1.75 py-0.75"
+            placeholder="Enter the price"
+          />
+          <div className="min-h-2.5 leading-3">
+            <span className="text-[12px] text-red-500 font-medium">
+              {errors.price && errors.price.message}
+            </span>
+          </div>
+        </div>
+
+        <div className="flex flex-col">
+          <label htmlFor="rating-input" className="text-[14px] font-semibold">
+            Rating
+          </label>
+          <input
+            type="number"
+            id="rating-input"
+            {...register("rate", { valueAsNumber: true })}
+            className="outline-none border-2 border-[#e5e7eb] text-[14px] font-medium duration-100 placeholder:text-[14px] hover:border-indigo-100 focus:border-indigo-500 rounded-sm px-1.75 py-0.75"
+            placeholder="Enter the rating"
+          />
+          <div className="min-h-2.5 leading-3">
+            <span className="text-[12px] text-red-500 font-medium">
+              {errors.rate && errors.rate?.message}
+            </span>
+          </div>
+        </div>
+
+        <div className="flex flex-col">
+          <label htmlFor="category-input" className="text-[14px] font-semibold">
+            Categories
+          </label>
+          <select id="category-input" {...register("categoryId")} className="outline-none border-2 border-[#e5e7eb] text-[14px] font-medium duration-100 placeholder:text-[14px] hover:border-indigo-100 focus:border-indigo-500 rounded-sm px-1.75 py-0.75">
+            <option value="">---</option>
+            {categories?.map((category) => (
+              <option key={category.id} value={category.id}>{category.name}</option>
+            ))}
+          </select>
+          <div className="min-h-2.5 leading-3">
+            <span className="text-[12px] text-red-500 font-medium">
+              {errors.categoryId && errors.categoryId.message}
             </span>
           </div>
         </div>

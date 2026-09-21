@@ -136,6 +136,7 @@ export const Header = () => {
                   type="button"
                   onClick={() => {
                     dispatch(logout());
+                    navigate("/")
                     setIsOpen(false);
                   }}
                   className="flex justify-start cursor-pointer hover:bg-slate-100 p-1.25 rounded-sm items-center gap-1 text-red-500 w-full hover:text-red-600 active:scale-95<FiLogIn />"

@@ -15,6 +15,7 @@ export const usersApi = baseApi.injectEndpoints({
 
     getCurrentUser: builder.query<User, void>({
       query: () => `/users/get-one`,
+      providesTags: ["CurrentUser"]
     }),
 
     register: builder.mutation<User, RegisterPayload>({
@@ -31,6 +32,7 @@ export const usersApi = baseApi.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["CurrentUser"],
     }),
   }),
 });
