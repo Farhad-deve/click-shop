@@ -42,14 +42,14 @@ export const AdminUserPage = () => {
                 </div>
             </div>
             
-            <div className="flex-1 text-[14px] font-medium flex justify-start items-center gap-1">
+            <div className="flex-1 text-[14px] dark:text-white font-medium flex justify-start items-center gap-1">
                 <span>User name: </span>
                 <span className="font-semibold">
                     {user?.userName}
                 </span>
             </div>
 
-            <div className="flex-1 text-[14px] font-medium flex justify-start items-center gap-1">
+            <div className="flex-1 text-[14px] dark:text-white font-medium flex justify-start items-center gap-1">
                 <span>Email: </span>
                 <span className="font-semibold">
                     {user?.email}
