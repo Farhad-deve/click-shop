@@ -7,6 +7,7 @@ import { BiChevronRight } from "react-icons/bi"
 import type { IconType } from "react-icons/lib";
 import { Link, useLocation } from "react-router-dom";
 import { motion } from 'motion/react';
+import { useState } from "react";
 
 interface NavDataType {
   id: number;
@@ -23,12 +24,12 @@ export const Sidebar = () => {
     { id: 4, name: "Create product", path: "/admin/create-product", icon: MdAddShoppingCart},
     { id: 5, name: "Users", path: "/admin/users", icon: HiOutlineUsers}
   ]
-
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const location = useLocation();
 
   return (
     <>
-      <aside className="absolute -left-56 duration-300 w-55 border border-[#e5e7eb] dark:border-indigo-900 shadow-sm rounded-md p-2.5 top-1.25 bottom-0 z-20 bg-white dark:bg-indigo-950 md:relative md:top-1.25 md:bottom-0 md:mb-1.25 md:left-0">
+      <aside className={`absolute ${isSidebarOpen ? "left-0" : "-left-56"} duration-300 w-55 border border-[#e5e7eb] dark:border-indigo-900 shadow-sm rounded-md p-2.5 top-1.25 bottom-0 z-20 bg-white dark:bg-indigo-950 md:relative md:top-1.25 md:bottom-0 md:mb-1.25 md:left-0`}>
         <div>
           <div className="flex justify-center items-center font-bold text-indigo-700 dark:text-white gap-1">
             <motion.h2
@@ -64,8 +65,13 @@ export const Sidebar = () => {
           </motion.div>
         </div>
 
-        <button type="button" aria-label="Toggle sidebar" className="h-10 w-6.25 bg-indigo-500 text-white rounded-sm text-[20px] flex md:hidden justify-center items-center hover:bg-indigo-600 bg-opacity-50 active:scale-95 absolute top-[50%] translate-y-[-50%] -right-7.5">
-          <div className="-rotate-0 duration-300">
+        <button
+          type="button"
+          aria-label="Toggle sidebar"
+          onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+          className="h-10 w-6.25 bg-indigo-500 text-white rounded-sm text-[20px] flex md:hidden justify-center items-center hover:bg-indigo-600 bg-opacity-50 active:scale-95 absolute top-[50%] translate-y-[-50%] -right-7.5"
+        >
+          <div className={`${isSidebarOpen ? "rotate-180" : "rotate-0"} duration-300`}>
             <BiChevronRight />
           </div>
         </button>

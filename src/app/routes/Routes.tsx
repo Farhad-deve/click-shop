@@ -113,7 +113,18 @@ export const router = createBrowserRouter([
           return { Component: ProtectedAdminUsersPage };
         }
       },
-
+      {
+        path: "admin/users/:id",
+        lazy: async () => {
+          const { AdminUserPage } = await import("../../pages/admin");
+          const ProtectedAdminUserPage = () => (
+            <ProtectedRoute>
+              <AdminUserPage />
+            </ProtectedRoute>
+          )
+          return { Component: ProtectedAdminUserPage };
+        }
+      },
       {
         path: "*",
         lazy: async () => {

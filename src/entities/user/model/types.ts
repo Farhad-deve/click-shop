@@ -32,3 +32,19 @@ export interface LoginPayload {
   email: string;
   password: string;
 }
+
+export interface OrderProduct {
+  name: string;
+  image: string;
+  price: number;
+  quantity: number;
+  _id: string;
+}
+
+export interface Order {
+  _id: string;
+  userId: string;
+  products: OrderProduct[];
+  createdAt: string;
+  updatedAt: string;
+}

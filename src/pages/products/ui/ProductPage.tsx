@@ -1,6 +1,6 @@
 import { MdOutlineAddShoppingCart } from "react-icons/md";
-import { BiHeart, BiArrowBack } from "react-icons/bi";
-import { useNavigate, useParams } from "react-router-dom";
+import { BiHeart } from "react-icons/bi";
+import { useParams } from "react-router-dom";
 import { motion } from 'motion/react';
 
 import { useGetProductByIdQuery } from "../../../entities/product";
@@ -15,10 +15,9 @@ import { FavoriteButton } from "../../../features/add-to-favorite";
 import { formatPrice } from "../../../shared/lib/utils";
 import { addToCart } from "../../../entities/cart";
 import { NotFoundPage } from "../../not-found";
+import { BackBtn } from "../../../shared/ui/BackBtn";
 
 export const ProductPage = () => {
-  const navigate = useNavigate();
-
   const { id } = useParams<{ id: string }>();
   if (!id) return null;
   const { data: product, isLoading } = useGetProductByIdQuery(id);
@@ -57,14 +56,7 @@ export const ProductPage = () => {
               transition={{ duration: 0.5 }}
             >
               <div className="flex justify-between items-center gap-2.5">
-                <button onClick={() => navigate(-1)} aria-label="Back" type="button" className="px-2.5 py-1.25 font-medium text-[14px] cursor-pointer bg-slate-100 dark:bg-indigo-400 dark:text-white rounded-sm text-slate-700 active:scale-95 hover:bg-slate-200 dark:hover:bg-indigo-600 flex justify-center items-center gap-1">
-                  <div>
-                    <BiArrowBack />
-                  </div>
-                  <div>
-                    Back
-                  </div>
-                </button>
+                <BackBtn />
 
                 <FavoriteButton productId={product.id} className="w-8.75 h-8.75 flex justify-center cursor-pointer hover:bg-red-50 dark:hover:bg-red-300 items-center border border-red-400 active:scale-95 text-red-500 font-medium rounded-sm text-[20px]" />
               </div>
@@ -123,15 +115,7 @@ export const ProductPage = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.9 }}
             >
-              <button type="button" onClick={() => navigate(-1)} className="px-2.5 py-1.25 font-medium text-[14px] bg-slate-100 cursor-pointer rounded-sm text-slate-700 active:scale-95 hover:bg-slate-200 flex justify-center items-center gap-1 md:hidden">
-                <div>
-                  <BiArrowBack />
-                </div>
-
-                <div>
-                  Back
-                </div>
-              </button>
+              <BackBtn />
 
               <div className="flex justify-end gap-2.5 flex-1">
                 <button type="button" className="w-8.75 h-8.75 flex md:hidden justify-center items-center cursor-pointer border border-red-400 active:scale-95 text-red-500 font-medium rounded-sm text-[20px]">

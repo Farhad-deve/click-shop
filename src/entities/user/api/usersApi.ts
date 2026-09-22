@@ -3,6 +3,7 @@ import type {
   AdminUser,
   LoginPayload,
   LoginResponse,
+  Order,
   RegisterPayload,
   User,
 } from "../model/types";
@@ -34,8 +35,12 @@ export const usersApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["CurrentUser"],
     }),
+
+    getAllOrders: builder.query<Order[], void>({
+      query: () => "/users/get-orders-admin"
+    })
   }),
 });
 
-export const { useGetCurrentUserQuery, useGetAllUsersQuery, useRegisterMutation, useLoginMutation } =
+export const { useGetCurrentUserQuery, useGetAllUsersQuery, useGetAllOrdersQuery, useRegisterMutation, useLoginMutation } =
   usersApi;
