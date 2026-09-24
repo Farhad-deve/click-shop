@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-B-hcVAMW.js";var t=e(),n=({children:e})=>(0,t.jsx)(t.Fragment,{children:(0,t.jsx)(`div`,{className:`py-1.75`,children:(0,t.jsx)(`div`,{className:`grid grid-cols-2 sm:grid-cols-3 md:grid-cols-[repeat(auto-fill,minmax(220px,1fr))] gap-2 w-[95%] mx-auto max-w-350`,children:e})})});export{n as t};

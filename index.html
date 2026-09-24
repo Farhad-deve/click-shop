@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/click-shop/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ClickShop</title>
+    <!-- Prevents flash on page load -->
+    <script>
+      (function () {
+        const stored = localStorage.getItem("theme");
+        const isDark =
+          stored === "dark" ||
+          (!stored &&
+            window.matchMedia("(prefers-color-scheme: dark)").matches);
+        if (isDark) document.documentElement.classList.add("dark");
+      })();
+    </script>
+
+    <meta name="description" content="A small e-commerce app built with React, Redux Toolkit, and TypeScript to practice real-world state management." />
+
+    <meta property="og:title" content="ClickShop" />
+    <meta property="og:description" content="A small e-commerce app built with React, Redux Toolkit, and TypeScript to practice real-world state management." />
+    <meta property="og:image" content="https://farhad-deve.github.io/click-shop/preview.jpg" />
+    <meta property="og:url" content="https://farhad-deve.github.io/click-shop/" />
+    <meta property="og:type" content="website" />
+    <script type="module" crossorigin src="/click-shop/assets/index-DnYwtINq.js"></script>
+    <link rel="modulepreload" crossorigin href="/click-shop/assets/jsx-runtime-B-hcVAMW.js">
+    <link rel="modulepreload" crossorigin href="/click-shop/assets/react-CxPUXRgL.js">
+    <link rel="modulepreload" crossorigin href="/click-shop/assets/ai-B9Aqqb1c.js">
+    <link rel="modulepreload" crossorigin href="/click-shop/assets/md-uMXdnj3y.js">
+    <link rel="stylesheet" crossorigin href="/click-shop/assets/index-DqzhJpeK.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
