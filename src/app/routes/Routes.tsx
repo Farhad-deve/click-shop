@@ -134,4 +134,6 @@ export const router = createBrowserRouter([
       },
     ],
   },
-]);
+],{
+  basename: '/click-shop/'
+});
