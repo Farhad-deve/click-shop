@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-B-hcVAMW.js";import{c as t}from"./index-DDZj8Pbs.js";var n=e(),r=()=>(0,n.jsx)(`div`,{className:`bg-gray w-full min-h-[calc(100vh-77px)] flex justify-center items-center`,children:(0,n.jsx)(t,{src:`/click-shop/loading.lottie`,loop:!0,autoplay:!0,className:`w-72 h-72`})});export{r as t};

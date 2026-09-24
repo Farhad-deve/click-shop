@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-B-hcVAMW.js";import{E as t}from"./index-DDZj8Pbs.js";var n=e(),r=({children:e})=>{let{ref:r,isVisible:i}=t({threshold:.3});return(0,n.jsx)(n.Fragment,{children:(0,n.jsx)(`div`,{ref:r,className:`transition-all duration-500 ease-out ${i?`opacity-100 translate-y-0`:`opacity-0 translate-y-6`}`,children:e})})};export{r as t};
