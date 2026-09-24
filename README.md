@@ -27,14 +27,15 @@ I am a beginner front-end developer. This project is not perfect or fully finish
 
 ## 📸 Preview
 
-<!-- Add screenshots here after deploying, for example: -->
-<!-- ![Home page](./screenshots/home.png) -->
-<!-- ![Product page](./screenshots/product.png) -->
-<!-- ![Admin panel](./screenshots/admin.png) -->
+| | |
+|---|---|
+| ![Home page light mode](./screenshots/home-light.png) | ![Home page dark mode](./screenshots/home-dark.png) |
+| ![Products page light mode](./screenshots/products-light.png) | ![Products page dark mode](./screenshots/products-dark.png) |
+| ![Admin panel light mode](./screenshots/admin-light.png) | ![Admin panel dark mode](./screenshots/admin-dark.png) |
 
 ## 🔗 Live Demo
 
-[Visit Live](#) <!-- replace # with your GitHub Pages link -->
+[Visit Live](https://farhad-deve.github.io/click-shop/) 
 
 ## 🚀 Getting Started
 
