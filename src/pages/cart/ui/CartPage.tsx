@@ -22,7 +22,7 @@ export const CartPage = () => {
             transition={{ duration: 0.5 }}
           >
             <DotLottieReact
-              src={"/add-to-cart.lottie"}
+              src={`${import.meta.env.BASE_URL}add-to-cart.lottie`}
               loop
               autoplay
               className="w-90"

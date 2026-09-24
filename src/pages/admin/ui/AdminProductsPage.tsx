@@ -41,7 +41,7 @@ export const AdminProductsPage = () => {
               transition={{ duration: 0.5 }}
             >
               <DotLottieReact
-                src={"/empty-list.lottie"}
+                src={`${import.meta.env.BASE_URL}empty-list.lottie`}
                 loop
                 autoplay
                 className="w-120"
