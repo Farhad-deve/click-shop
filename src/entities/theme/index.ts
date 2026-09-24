@@ -1,0 +1,1 @@
+export { toggleTheme, themeReducer } from './model/themeSlice';

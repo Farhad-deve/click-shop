@@ -7,6 +7,7 @@ import { FiHeart } from "react-icons/fi";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "motion/react";
 import Logo from "/logo.jpg";
+import DarkLogo from '/logo-dark.png';
 import { ThemeToggle } from "../../../features/theme-toggle";
 import { useAppDispatch, useAppSelector } from "../../../shared/lib/hooks";
 import { SearchAutoComplete } from "../../../features/search-autocomplete";
@@ -18,6 +19,7 @@ export const Header = () => {
   const { isLoading, token } = useAuthInit();
   const favoriteCount = useAppSelector((state) => state.favorite.ids.length);
   const cartCount = useAppSelector((state) => state.cart.items.length);
+  const theme = useAppSelector((state) => state.theme.theme)
 
   const currentUser = useAppSelector((state) => state.user.currentUser);
   const navigate = useNavigate();
@@ -37,9 +39,9 @@ export const Header = () => {
       <div>
         <Link to={"/"}>
           <img
-            src={Logo}
+            src={theme === "dark" ? DarkLogo : Logo}
             alt="Click Shop"
-            className="h-7.5 sm:h-8.75 object-contain active:scale-95 duration-100"
+            className={`${theme === "dark" ? "h-13" : "h-7.5 sm:h-8.75"} object-contain active:scale-95 duration-100`}
           />
         </Link>
       </div>

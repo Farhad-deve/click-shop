@@ -115,7 +115,9 @@ export const ProductPage = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.9 }}
             >
-              <BackBtn />
+              <div className="md:hidden">
+                <BackBtn />
+              </div>
 
               <div className="flex justify-end gap-2.5 flex-1">
                 <button type="button" className="w-8.75 h-8.75 flex md:hidden justify-center items-center cursor-pointer border border-red-400 active:scale-95 text-red-500 font-medium rounded-sm text-[20px]">

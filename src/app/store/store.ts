@@ -5,6 +5,7 @@ import { userReducer } from "../../entities/user";
 import { favoriteReducer } from "../../entities/favorite";
 import { cartReducer } from "../../entities/cart";
 import { modalReducer } from "../../entities/modal";
+import { themeReducer } from "../../entities/theme";
 
 export const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ export const store = configureStore({
     favorite: favoriteReducer,
     cart: cartReducer,
     modal: modalReducer,
+    theme: themeReducer,
   },
   middleware: (getDefault) => getDefault().concat(baseApi.middleware),
 });
