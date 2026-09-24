@@ -9,11 +9,11 @@ import { Loader } from "../../../shared/ui/Loader";
 
 export const AdminUserPage = () => {
     const { id } = useParams<{ id: string }>();
-    const { data: allOrders, isLoading } = useGetAllOrdersQuery();
+    const { isLoading } = useGetAllOrdersQuery();
     const { data: users } = useGetAllUsersQuery();
 
     const user = users?.find((user) => user._id === id)
-    const userOrders = allOrders?.filter((order) => order.userId === id)
+    // const userOrders = allOrders?.filter((order) => order.userId === id)
     const isUserActive = users?.find((user) => user._id === id)?.isActive
 
     if (isLoading) return <Loader />;

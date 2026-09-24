@@ -6,14 +6,14 @@ import {
 import { motion } from "motion/react";
 import { MdOutlineHistory } from "react-icons/md";
 import { Loader } from "../../../shared/ui/Loader";
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 
 export const ProfilePage = () => {
-  const { id } = useParams<{ id: string }>();
-  const { data: allOrders, isLoading } = useGetAllOrdersQuery();
+  // const { id } = useParams<{ id: string }>();
+  const { isLoading } = useGetAllOrdersQuery();
   const { data: currentUser, isLoading : isCurrentUserLoading } = useGetCurrentUserQuery();
 
-  const userOrders = allOrders?.filter((order) => order.userId === id)
+  // const userOrders = allOrders?.filter((order) => order.userId === id)
   const isUserActive = currentUser?.isActive;
 
   if (isLoading || isCurrentUserLoading) return <Loader />;
